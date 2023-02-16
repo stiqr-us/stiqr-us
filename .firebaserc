@@ -1,5 +1,11 @@
 {
   "projects": {
-    "default": "stiqr-us"
-  }
+    "default": "stiqr-dev",
+    "dev": "stiqr-dev",
+    "stage": "stiqr-stage",
+    "test": "stiqr-test",
+    "prod": "stiqr-us"
+  },
+  "targets": {},
+  "etags": {}
 }
