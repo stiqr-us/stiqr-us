@@ -11,7 +11,7 @@ According to best `git` practices, each feature should be developed
 in it's own branch, then merged into `dev`.
 
 ```bash
-firebase deploy
+npm run deploy-dev
 ```
 
 ### Testing AKA test
@@ -20,7 +20,7 @@ This is where code will be merged to once we want to run serious
 testing on our code, such as unit and end-to-end (e2e) tests.
 
 ```bash
-firebase deploy --use test
+npm run deploy-test
 ```
 
 ### Staging AKA stage
@@ -29,7 +29,7 @@ This step is set up mock the production environment as closely as possible.
 At this point, code should be shown to business executives for manual inspection.
 
 ```bash
-firebase deploy --use stage
+npm run deploy-stage
 ```
 
 ### Production AKA prod
@@ -38,7 +38,7 @@ This is the final product, what customers will connect to.
 This environment must be protected from bad code and database deletions.
 
 ```bash
-firebase deploy --use prod
+npm run deploy-prod
 ```
 
 # Angular Boilerplate
