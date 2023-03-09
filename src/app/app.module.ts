@@ -9,13 +9,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { HomepageComponent } from './homepage/homepage.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { CustomerAccountComponent } from './customer-account/customer-account.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     AboutUsComponent,
-    CustomerAccountComponent
+    CustomerAccountComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
