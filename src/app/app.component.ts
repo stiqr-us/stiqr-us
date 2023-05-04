@@ -8,4 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent {
   title = 'stiqr-us';
 
+  currentPage:string = "homepage";
+
+  loginClicked() {
+    this.currentPage = "login";
+  }
+  logoClicked() {
+    console.log("here");
+    this.currentPage = "homepage";
+  }
+  signupClicked() {
+    this.currentPage = "sign up";
+  }
 }

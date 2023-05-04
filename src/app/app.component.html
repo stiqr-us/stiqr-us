@@ -2,7 +2,7 @@
   <div style="display:inline-block;">
     <div class="nav-bar">
       <div class="nav-bar-grid">
-        <div class="center-logo">
+        <div class="center-logo" (click)="logoClicked()">
           <img class="logo" src="./../assets/images/stiQR_logo.JPEG" alt="stiqr logo">
         </div>
         <div class="nav-button"><p class="nav-button-p">Our Mission</p></div>
@@ -13,27 +13,39 @@
       </div>
     </div>
   </div>
+
   <div class="log-in">
-    <button mat-raised-button style="background-color:#F09D51">Login</button>
+    <button mat-button class="signUpBtn" (click)="signupClicked()">Sign Up</button>
+    <button mat-button class="LoginBtn" (click)="loginClicked()">Login</button>
   </div>
 </div>
 
-<app-homepage></app-homepage>
+<app-homepage *ngIf="currentPage == 'homepage'"></app-homepage>
+<app-login *ngIf="currentPage == 'login'"></app-login>
+<app-sign-up *ngIf="currentPage == 'sign up'"></app-sign-up>
 
-<div style="background-color: gray;">
-  <p class="footer-text">Contact STIQR</p>
-  <p class="footer-text">Phone: (111) 111-1111</p>
-  <p class="footer-text">email: stiqrHelp@gmail.com</p>
-</div>
+<div *ngIf="currentPage != 'login'">
+  <div style="background-color: #E0DFD5; color:black; padding:10px 5%">
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
+      <p class="footer-text">ABOUT US</p>
+      <p class="footer-text">SHOP</p>
+      <p class="footer-text">HELP</p>
+      <p class="footer-text">CONTACT</p>
+    </div>
 
-<div class="footer-grid">
-  <div>
-    <img class="footer-logo" src="../assets/images/facebook-logo-circle.png" alt="scenery">
-    <img class="footer-logo" src="../assets/images/instagram-logo-circle.png" alt="scenery">
-    <img class="footer-logo" src="../assets/images/twitter-logo-circle.png" alt="scenery">
+    <hr>
+
+    <div class="footer-grid">
+      <div style="margin-left:auto; margin-right:auto; width:105px;">
+        <img class="footer-logo" src="../assets/images/facebook-logo-circle.png" alt="scenery">
+        <img class="footer-logo" src="../assets/images/instagram-logo-circle.png" alt="scenery">
+        <img class="footer-logo" src="../assets/images/twitter-logo-circle.png" alt="scenery">
+      </div>
+    </div>
   </div>
+
   <div class="copyright-box">
-    <p class="copyright-text">(c) STIQR 2023</p>
+    <p class="copyright-text">© Copyright STIQR 2023</p>
   </div>
 </div>
 <!-- <h2 style="color: #F09D51">New Stickers for purchase</h2> -->
