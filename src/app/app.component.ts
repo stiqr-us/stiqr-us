@@ -10,6 +10,9 @@ export class AppComponent {
 
   currentPage:string = "homepage";
 
+  signUp_username:string = "";
+  signUp_password:string = "";
+
   loginClicked() {
     this.currentPage = "login";
   }
@@ -19,5 +22,10 @@ export class AppComponent {
   }
   signupClicked() {
     this.currentPage = "sign up";
+  }
+
+  AccountCreated(userPass:string[]) {
+    this.signUp_username = userPass[0];
+    this.signUp_password = userPass[1];
   }
 }

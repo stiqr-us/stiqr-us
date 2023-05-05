@@ -2,35 +2,41 @@
   <div style="display:inline-block;">
     <div class="nav-bar">
       <div class="nav-bar-grid">
-        <div class="center-logo" (click)="logoClicked()">
+        <div class="center-logo" routerLink="/">
           <img class="logo" src="./../assets/images/stiQR_logo.JPEG" alt="stiqr logo">
         </div>
-        <div class="nav-button"><p class="nav-button-p">Our Mission</p></div>
+        <div class="nav-button" routerLink="/"><p class="nav-button-p">Home</p></div>
+        <div class="nav-button" routerLink="/our-mission"><p class="nav-button-p">Our Mission</p></div>
         <div class="nav-button"><p class="nav-button-p">Shop</p></div>
-        <div class="nav-button"><p class="nav-button-p">Register</p></div>
-        <div class="nav-button"><p class="nav-button-p">Contact Us</p></div>
-        <div class="nav-button"><p class="nav-button-p">FAQ</p></div>
+        <div class="nav-button" routerLink="/contact-us"><p class="nav-button-p">Contact Us</p></div>
+        <div class="nav-button" routerLink="/FAQ"><p class="nav-button-p">FAQ</p></div>
       </div>
     </div>
   </div>
 
   <div class="log-in">
-    <button mat-button class="signUpBtn" (click)="signupClicked()">Sign Up</button>
-    <button mat-button class="LoginBtn" (click)="loginClicked()">Login</button>
+    <button mat-button class="signUpBtn"><a routerLink="/signup" style="text-decoration: none; color: white;">Sign Up</a></button>
+    <button mat-button class="LoginBtn"><a routerLink="/login" style="text-decoration: none; color: white;">Login</a></button>
   </div>
 </div>
 
-<app-homepage *ngIf="currentPage == 'homepage'"></app-homepage>
-<app-login *ngIf="currentPage == 'login'"></app-login>
-<app-sign-up *ngIf="currentPage == 'sign up'"></app-sign-up>
+<router-outlet></router-outlet>
 
-<div *ngIf="currentPage != 'login'">
+<div>
   <div style="background-color: #E0DFD5; color:black; padding:10px 5%">
     <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
-      <p class="footer-text">ABOUT US</p>
-      <p class="footer-text">SHOP</p>
-      <p class="footer-text">HELP</p>
-      <p class="footer-text">CONTACT</p>
+      <div class="footerBox" routerLink="/our-mission">
+        <p class="footer-text">ABOUT US</p>
+      </div>
+      <div class="footerBox">
+        <p class="footer-text">SHOP</p>
+      </div>
+      <div class="footerBox" routerLink="/FAQ">
+        <p class="footer-text">HELP</p>
+      </div>
+      <div class="footerBox" routerLink="contact-us">
+        <p class="footer-text">CONTACT</p>
+      </div>
     </div>
 
     <hr>
@@ -48,4 +54,3 @@
     <p class="copyright-text">© Copyright STIQR 2023</p>
   </div>
 </div>
-<!-- <h2 style="color: #F09D51">New Stickers for purchase</h2> -->
