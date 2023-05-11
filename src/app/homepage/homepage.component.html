@@ -1,0 +1,68 @@
+
+
+<div class="background">
+
+  <div class="slideshow-container">
+
+    <div class="mySlides fade" *ngIf="slideIndex == 1">
+      <img src="https://loremflickr.com/700/300/mountains" (load)="onImage1Load()" alt="scenery">
+    </div>
+    <div class="mySlides fade" *ngIf="slideIndex == 2">
+      <img src="https://loremflickr.com/700/300/mountains" (load)="onImage2Load()" alt="scenery">
+    </div>
+    <div class="mySlides fade" *ngIf="slideIndex == 3">
+      <img src="https://loremflickr.com/700/300/mountains" (load)="onImage3Load()" alt="scenery">
+    </div>
+
+    <!-- <img src="https://loremflickr.com/320/240/mountains" /> -->
+
+    <div class="slideshow-text-holder" *ngIf="slideIndex == 1 && displaySlideshow1 == true">
+      <p class="slideshow-title">Our Mission</p>
+      <p class="slideshow-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+    </div>
+    <div class="slideshow-text-holder" *ngIf="slideIndex == 2 && displaySlideshow2 == true">
+      <p class="slideshow-title">Caption Two</p>
+      <p class="slideshow-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+    </div>
+    <div class="slideshow-text-holder" *ngIf="slideIndex == 3 && displaySlideshow3 == true">
+      <p class="slideshow-title">Caption Three</p>
+      <p class="slideshow-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+    </div>
+
+    <div *ngIf="displaySlideshow1 == true || displaySlideshow2 == true || displaySlideshow3 == true">
+      <a class="prev" (click)="plusSlides(-1)">❮</a>
+      <a class="next" (click)="plusSlides(1)">❯</a>
+
+      <div class="slideshow-dot-holder">
+        <span class="dot" (click)="currentSlide(1)"></span>
+        <span class="dot" (click)="currentSlide(2)"></span>
+        <span class="dot" (click)="currentSlide(3)"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-bar">
+    <p><a routerLink="/our-mission">Click here</a> to find out more about stiQR</p>
+  </div>
+
+  </div>
+
+  <p style="text-align: center;"><i> How Stiqrs work </i></p>
+
+  <div class="lower-grid">
+  <p>1.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+
+  <p>2.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+
+  <p>3.</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad.</p>
+  </div>
