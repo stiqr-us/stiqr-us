@@ -49,7 +49,7 @@
                   "maximumError": "4kb"
                 }
               ],
-              "outputHashing": "all",
+              "outputHashing": "all"
             },
             "stage": {
               "budgets": [
@@ -110,31 +110,13 @@
               "browserTarget": "stiqr-us:build:prod"
             },
             "stage": {
-              "browserTarget": "stiqr-us:build:stage",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.stage.ts"
-                }
-              ]
+              "browserTarget": "stiqr-us:build:stage"
             },
             "test": {
-              "browserTarget": "stiqr-us:build:test",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.test.ts"
-                }
-              ]
+              "browserTarget": "stiqr-us:build:test"
             },
             "dev": {
-              "browserTarget": "stiqr-us:build:dev",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.dev.ts"
-                }
-              ]
+              "browserTarget": "stiqr-us:build:dev"
             }
           },
           "defaultConfiguration": "dev"
