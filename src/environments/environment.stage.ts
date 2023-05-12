@@ -1,5 +1,5 @@
 export const environment = {
-  firebaseConfig: {
+  firebase: {
     apiKey: "AIzaSyDCD9DhI7Jpki6vyOcZfi_evukNtG7W9jg",
     authDomain: "stiqr-stage.firebaseapp.com",
     projectId: "stiqr-stage",

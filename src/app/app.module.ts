@@ -14,6 +14,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { OurMissionComponent } from './our-mission/our-mission.component';
 import { FAQComponent } from './faq/faq.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,10 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]
