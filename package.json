@@ -8,8 +8,6 @@
     "watch": "ng build --watch -c dev",
     "test": "ng test",
     "deploy-dev": "ng build -c dev && firebase use dev && firebase deploy && firebase use default",
-    "deploy-test": "ng build -c test && firebase use test && firebase deploy && firebase use default",
-    "deploy-stage": "ng build -c stage && firebase use stage && firebase deploy && firebase use default",
     "deploy-prod": "ng build -c prod && firebase use prod && firebase deploy && firebase use default"
   },
   "private": true,
