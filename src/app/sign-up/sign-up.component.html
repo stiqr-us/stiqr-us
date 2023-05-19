@@ -10,21 +10,21 @@
         <!-- Put in a password -->
         <!-- Sign up with Google -->
 
-        <p class="inputLabels">Username</p>
-        <input class="inputs" type="text">
+        <p class="inputLabels">Email</p>
+        <input class="inputs" type="text" [(ngModel)]="email">
 
         <p class="inputLabels" style="margin-top:20px;">Password</p>
-        <input class="inputs" type="text">
+        <input class="inputs" type="text" [(ngModel)]="password">
 
         <p class="inputLabels">Reenter password</p>
-        <input class="inputs" type="text">
+        <input class="inputs" type="text" [(ngModel)]="passwordCheck">
 
-        <button class="loginBtn" mat-raised-button color="primary" style="margin-top:20px;">Create Account</button>
+        <button class="loginBtn" mat-raised-button color="primary" style="margin-top:20px;" (click)="createAccount()">Create Account</button>
 
-        <p style="text-align:center">OR</p>
+        <!-- <p style="text-align:center">OR</p>
 
         <p style="text-align:center;">Sign in with Google</p>
-        <button class="loginBtn" mat-raised-button color="primary">Google</button>
+        <button class="loginBtn" mat-raised-button color="primary">Google</button> -->
 
       </div>
   </div>
