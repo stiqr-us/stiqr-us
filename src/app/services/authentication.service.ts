@@ -8,8 +8,8 @@ import { Subscription } from 'rxjs';
 })
 export class authService implements OnDestroy{
 
-  signUp_username: string = "";
-  signUp_password: string = "";
+  // signUp_username: string = "";
+  // signUp_password: string = "";
 
   providers = [
     { "name": "Google", "type": new GoogleAuthProvider },
@@ -29,10 +29,10 @@ export class authService implements OnDestroy{
     })
   }
 
-  AccountCreated(userPass: string[]) {
-    this.signUp_username = userPass[0];
-    this.signUp_password = userPass[1];
-  }
+  // AccountCreated(userPass: string[]) {
+  //   this.signUp_username = userPass[0];
+  //   this.signUp_password = userPass[1];
+  // }
 
   async createEmailPassword(email: string, password: string) {
     console.log("create")

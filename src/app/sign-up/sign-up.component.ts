@@ -15,14 +15,16 @@ export class SignUpComponent {
   hadError:boolean = false;
   errorMessage:string = "";
 
+  promiseObject:any;
+
   constructor(public auth:authService){}
 
   createAccount() {
     if(this.password == this.passwordCheck) {
-      this.auth.createEmailPassword(this.email, this.password);
+      this.promiseObject = this.auth.createEmailPassword(this.email, this.password);
     } else {
       this.hadError = true;
-      this.errorMessage = "Your passwords didn't match up. Make sure you do them the same."
+      this.errorMessage = "Your passwords didn't match up. Make sure you do them the same.";
     }
   }
 
