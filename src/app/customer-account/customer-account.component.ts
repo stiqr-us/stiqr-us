@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./customer-account.component.scss']
 })
 export class CustomerAccountComponent {
-  // Here's a wireframe idea https://wireframe.cc/JaU1N0
+  // Here's a wireframe idea https://wireframe.cc/f3vxRj
 }
