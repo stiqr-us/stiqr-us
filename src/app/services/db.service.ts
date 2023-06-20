@@ -1,8 +1,9 @@
 import { Injectable, inject } from '@angular/core';
-import { CollectionReference, Firestore, addDoc, collection, collectionData, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, addDoc, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { UserProfile } from './user-profile';
 import { Sticker } from './sticker';
 import { StickerLocation } from './sticker-location';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,7 @@ import { StickerLocation } from './sticker-location';
 export class DbService {
 
   private firestore: Firestore = inject(Firestore);
-  // userProfiles$: Observable<UserProfile[]>;
   userProfilesCollection: CollectionReference;
-
-  // stickers$: Observable<Sticker[]>;
   stickersCollection: CollectionReference;
 
   constructor() {
@@ -29,8 +27,8 @@ export class DbService {
     setDoc(doc(this.userProfilesCollection, user.id), user)
   }
 
-  async getUserProfile(userId: string): Promise<UserProfile> {
-    return (await getDoc(doc(this.userProfilesCollection, userId))).data() as UserProfile
+  getUserProfile(userId: string): Observable<UserProfile> {
+    return docData(doc(this.userProfilesCollection, userId)) as Observable<UserProfile>;
   }
 
   updateUserProfile(user: UserProfile, field: string, fieldValue: string | null | boolean): void {
@@ -42,20 +40,28 @@ export class DbService {
     addDoc(this.stickersCollection, sticker)
   }
 
-  async getStickersForUser(userId: string): Promise<Sticker[]> {
-    let stickers: Sticker[] = [];
-    (await getDocs(query(this.stickersCollection, where("userId", "==", userId)))).docs.forEach(doc => {
-      stickers.push(doc.data() as Sticker)
-    })
-    return stickers
+  // async getStickersForUser(userId: string): Promise<Sticker[]> {
+    // let stickers: Sticker[] = [];
+    // (await getDocs(query(this.stickersCollection, where("userId", "==", userId)))).docs.forEach(doc => {
+    //   stickers.push(doc.data() as Sticker)
+    // })
+    // return stickers
+  // }
+
+  getStickersForUser(userId: string): Observable<Sticker[]> {
+    return collectionData((query(this.stickersCollection, where("userId", "==", userId)))) as Observable<Sticker[]>
   }
 
-  async getStickersNotPrinted(): Promise<Sticker[]> {
-    let stickers: Sticker[] = [];
-    (await getDocs(query(this.stickersCollection, where("printed", "==", false)))).docs.forEach(doc => {
-      stickers.push(doc.data() as Sticker)
-    })
-    return stickers
+  // async getStickersNotPrinted(): Promise<Sticker[]> {
+  //   let stickers: Sticker[] = [];
+  //   (await getDocs(query(this.stickersCollection, where("printed", "==", false)))).docs.forEach(doc => {
+  //     stickers.push(doc.data() as Sticker)
+  //   })
+  //   return stickers
+  // }
+
+  getStickersNotPrinted(): Observable<Sticker[]> {
+    return collectionData((query(this.stickersCollection, where("printed", "==", false)))) as Observable<Sticker[]>
   }
 
   updateSticker(sticker: Sticker, field: string, fieldValue: string | boolean): void {
