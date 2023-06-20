@@ -28,7 +28,7 @@ export class DbService {
   }
 
   getUserProfile(userId: string): Observable<UserProfile> {
-    return docData(doc(this.userProfilesCollection, userId)) as Observable<UserProfile>;
+    return docData(doc(this.userProfilesCollection, userId), {idField: 'id'}) as Observable<UserProfile>;
   }
 
   updateUserProfile(user: UserProfile, field: string, fieldValue: string | null | boolean): void {
@@ -49,7 +49,7 @@ export class DbService {
   // }
 
   getStickersForUser(userId: string): Observable<Sticker[]> {
-    return collectionData((query(this.stickersCollection, where("userId", "==", userId)))) as Observable<Sticker[]>
+    return collectionData(query(this.stickersCollection, where("userId", "==", userId)), {idField: 'id'}) as Observable<Sticker[]>
   }
 
   // async getStickersNotPrinted(): Promise<Sticker[]> {
@@ -61,7 +61,7 @@ export class DbService {
   // }
 
   getStickersNotPrinted(): Observable<Sticker[]> {
-    return collectionData((query(this.stickersCollection, where("printed", "==", false)))) as Observable<Sticker[]>
+    return collectionData(query(this.stickersCollection, where("printed", "==", false)), {idField: 'id'}) as Observable<Sticker[]>
   }
 
   updateSticker(sticker: Sticker, field: string, fieldValue: string | boolean): void {
