@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { CollectionReference, Firestore, GeoPoint, Timestamp, addDoc, collection, collectionData, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, addDoc, collection, collectionData, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { UserProfile } from './user-profile';
-import { Observable } from 'rxjs';
 import { Sticker } from './sticker';
 import { StickerLocation } from './sticker-location';
 
