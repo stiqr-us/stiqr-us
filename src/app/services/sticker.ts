@@ -1,4 +1,4 @@
-import { GeoPoint, Timestamp } from "@angular/fire/firestore"
+import { StickerLocation } from "./sticker-location";
 
 export interface Sticker {
   id?: string,
@@ -6,13 +6,10 @@ export interface Sticker {
   picture: string,
   activationCode: string,
   activated: boolean,
+
+  // if activated is true, all below fields should exist
   userId?: string,
   name?: string,
-  lost: boolean,
-  locations: {
-    location: GeoPoint,
-    timestamp: Timestamp,
-    scannerName?: string,
-    scannerNumber?: string,
-  }[],
+  lost?: boolean,
+  locations?: StickerLocation[],
 }

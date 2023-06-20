@@ -1,11 +1,10 @@
-export interface User {
+export interface UserProfile {
   id?: string,
-  admin: boolean,
+  admin?: boolean,
 
   // shareXxxAlways: If true display always,
   // If false only display when lost.
-  // Name should default to true,
-  // all else should default to false.
+  // All shareXxxAlways should default to true.
 
   name: string,
   shareNameAlways: boolean,
