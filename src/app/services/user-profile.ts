@@ -12,8 +12,8 @@ export interface UserProfile {
   email: string | null,
   shareEmailAlways: boolean,
 
-  number: string | null
-  shareNumberAlways: boolean
+  number: string | null,
+  shareNumberAlways: boolean,
 
   link: string | null,
   shareLinkAlways: boolean

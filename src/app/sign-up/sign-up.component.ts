@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { authService } from '../services/authentication.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -17,7 +17,7 @@ export class SignUpComponent {
 
   promiseObject:any;
 
-  constructor(public auth:authService){}
+  constructor(public auth: AuthService) { }
 
   createAccount() {
     if(this.password == this.passwordCheck) {

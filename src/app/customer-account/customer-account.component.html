@@ -13,22 +13,22 @@
     <div style="display:grid; grid-template-columns: 1fr 3fr 1fr 1fr; row-gap: 10px;">
 
       <p style="margin:0px;">Name</p>
-      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text" value="John Doe">
+      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text" value="{{userProfile?.name}}">
       <div style="margin-left:auto; margin-right:auto; width:40px; height:20px; border-radius:15px; background-color: gray; border:1px solid black;"></div>
       <div style="margin-left:auto; margin-right:auto; width:40px; height:20px; border-radius:15px; background-color: gray; border:1px solid black;"></div>
 
       <p style="margin:0px;">Phone</p>
-      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text" value="(111) 1111-1111">
+      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text" value="{{userProfile?.number}}">
       <div style="margin-left:auto; margin-right:auto; width:40px; height:20px; border-radius:15px; background-color: gray; border:1px solid black;"></div>
       <div style="margin-left:auto; margin-right:auto; width:40px; height:20px; border-radius:15px; background-color: gray; border:1px solid black;"></div>
 
       <p style="margin:0px;">Email</p>
-      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text" value="johndoe@email.com">
+      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text" value="{{userProfile?.email}}">
       <div style="margin-left:auto; margin-right:auto; width:40px; height:20px; border-radius:15px; background-color: gray; border:1px solid black;"></div>
       <div style="margin-left:auto; margin-right:auto; width:40px; height:20px; border-radius:15px; background-color: gray; border:1px solid black;"></div>
 
       <p style="margin:0px;">Social Media Link</p>
-      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text" value="facebook.com/johndoe">
+      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text" value="{{userProfile?.link}}">
       <div style="margin-left:auto; margin-right:auto; width:40px; height:20px; border-radius:15px; background-color: gray; border:1px solid black;"></div>
       <div style="margin-left:auto; margin-right:auto; width:40px; height:20px; border-radius:15px; background-color: gray; border:1px solid black;"></div>
 
@@ -48,6 +48,6 @@
     <img src="https://loremflickr.com/200/200/mountains" alt="scenery" style="margin:20px;">
   </div> -->
 
-  <button mat-raised-button style="background-color: #F09D51; color:white" routerLink="/">Logout</button>
+  <button mat-raised-button style="background-color: #F09D51; color:white" (click)="auth.logout()">Logout</button>
 
 </div>

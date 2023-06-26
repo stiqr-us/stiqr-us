@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { CollectionReference, Firestore, addDoc, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { User } from '@angular/fire/auth'
 import { UserProfile } from './user-profile';
 import { Sticker } from './sticker';
 import { StickerLocation } from './sticker-location';
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,18 +23,56 @@ export class DbService {
     // this.stickers$ = collectionData(this.stickersCollection, {idField: 'id'}) as Observable<Sticker[]>;
   }
 
-  addUserProfile(user: UserProfile): void {
-    user.admin = false
-    setDoc(doc(this.userProfilesCollection, user.id), user)
+  initializeUser(user: User): void {
+    this.checkUserProfileExists$(user.uid).subscribe((exists: boolean) => {
+      if (!exists) {
+        this.addUserProfile({
+          id: user.uid,
+
+          name: String(user.displayName),
+          shareNameAlways: true,
+
+          email: user.email,
+          shareEmailAlways: true,
+
+          number: user.phoneNumber,
+          shareNumberAlways: true,
+
+          link: null,
+          shareLinkAlways: true,
+        })
+      }
+    })
   }
 
-  getUserProfile(userId: string): Observable<UserProfile> {
+  addUserProfile(user: UserProfile): void {
+    delete user.admin;
+    setDoc(doc(this.userProfilesCollection, user.id), user);
+  }
+
+  getUserProfile$(userId: string): Observable<UserProfile> {
     return docData(doc(this.userProfilesCollection, userId), {idField: 'id'}) as Observable<UserProfile>;
   }
 
+  checkUserProfileExists$(userId: string): Observable<boolean> {
+    return this.getUserProfile$(userId).pipe(switchMap((userProfile: UserProfile) => {
+      if (userProfile) {
+        return of(true);
+      } else {
+        return of(false);
+      }
+    }))
+  }
+
   updateUserProfile(user: UserProfile, field: string, fieldValue: string | null | boolean): void {
-    if (fieldValue == "") { fieldValue = null }
-    updateDoc(doc(this.userProfilesCollection, user.id), field, fieldValue)
+    if (fieldValue == "") {
+      fieldValue = null
+    } else if (field == "name" && fieldValue == "") {
+      // TODO: Tell user they can't have null values
+      alert('Name can\'t be empty')
+      return
+    };
+    updateDoc(doc(this.userProfilesCollection, user.id), field, fieldValue);
   }
 
   addSticker(sticker: Sticker) {
@@ -48,7 +87,7 @@ export class DbService {
     // return stickers
   // }
 
-  getStickersForUser(userId: string): Observable<Sticker[]> {
+  getStickersForUser$(userId: string): Observable<Sticker[]> {
     return collectionData(query(this.stickersCollection, where("userId", "==", userId)), {idField: 'id'}) as Observable<Sticker[]>
   }
 
@@ -60,7 +99,7 @@ export class DbService {
   //   return stickers
   // }
 
-  getStickersNotPrinted(): Observable<Sticker[]> {
+  getStickersNotPrinted$(): Observable<Sticker[]> {
     return collectionData(query(this.stickersCollection, where("printed", "==", false)), {idField: 'id'}) as Observable<Sticker[]>
   }
 
