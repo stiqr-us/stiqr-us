@@ -64,15 +64,15 @@ export class DbService {
     }))
   }
 
-  updateUserProfile(user: UserProfile, field: string, fieldValue: string | null | boolean): void {
+  updateUserProfile(userId: string, field: string, fieldValue: string | null | boolean): void {
     if (fieldValue == "") {
-      fieldValue = null
+      let fieldValue = null
     } else if (field == "name" && fieldValue == "") {
       // TODO: Tell user they can't have null values
       alert('Name can\'t be empty')
       return
     };
-    updateDoc(doc(this.userProfilesCollection, user.id), field, fieldValue);
+    updateDoc(doc(this.userProfilesCollection, userId), field, fieldValue);
   }
 
   addSticker(sticker: Sticker) {
@@ -103,8 +103,8 @@ export class DbService {
     return collectionData(query(this.stickersCollection, where("printed", "==", false)), {idField: 'id'}) as Observable<Sticker[]>
   }
 
-  updateSticker(sticker: Sticker, field: string, fieldValue: string | boolean): void {
-    updateDoc(doc(this.stickersCollection, sticker.id), field, fieldValue)
+  updateSticker(stickerId: string, field: string, fieldValue: string | boolean): void {
+    updateDoc(doc(this.stickersCollection, stickerId), field, fieldValue)
   }
 
   updateStickerLocation(sticker: Sticker, location: StickerLocation): void {

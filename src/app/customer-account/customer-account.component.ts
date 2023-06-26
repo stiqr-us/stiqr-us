@@ -5,6 +5,8 @@ import { User, createUserWithEmailAndPassword } from 'firebase/auth';
 import { NEVER, Observable, Subscription, of, throwError } from 'rxjs';
 import { switchMap } from 'rxjs/operators'
 import { UserProfile } from '../services/user-profile';
+import { Sticker } from '../services/sticker';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-customer-account',
@@ -16,8 +18,11 @@ export class CustomerAccountComponent implements OnDestroy {
 
   user: User | null = null;
   // userProfile$: Observable<UserProfile> | undefined;
-  userProfile: UserProfile | null = null;
+  userStickers$: Observable<Sticker[]> | undefined;
+  userProfile: UserProfile | undefined;
+  userStickers: Sticker[] | undefined;
   userProfileSubscription: Subscription;
+  userStickersSubscription: Subscription;
 
   constructor(
     public auth: AuthService,
@@ -46,11 +51,52 @@ export class CustomerAccountComponent implements OnDestroy {
         // console.log('no profile exists')
       }
     })
+    this.userStickersSubscription = this.auth.user$.pipe(
+      switchMap((user: User | null) => {
+        if (user) {
+          this.user = user;
+          // console.log('logged in');
+          // console.log(user);
+          // return this.db.getStickersForUser$(user.uid);
+          this.userStickers$ = this.db.getStickersForUser$(user.uid);
+          return this.userStickers$;
+        } else {
+          // console.log('not logged in')
+          return NEVER
+        }
+      })
+    ).subscribe((userStickers: Sticker[]) => {
+      if (userStickers) {
+        // console.log(userStickers);
+        this.userStickers = userStickers;
+      } else {
+        // console.log('no')
+      }
+    })
   }
 
+  toggleSlideSticker(event: MatSlideToggleChange, stickerId: string | undefined, field: string) {
+    if (event) {
+      this.db.updateSticker(String(stickerId), field, event.checked)
+    }
+  }
+
+  toggleSlide(event: MatSlideToggleChange, userProfileId: string | undefined, field: string) {
+    if (event) {
+      this.db.updateUserProfile(String(userProfileId), field, event.checked)
+    }
+  }
+
+  changeInput(event: Event, userProfileId: string | undefined, field: string) {
+    if (event) {
+      (event.target as HTMLInputElement).value
+      this.db.updateUserProfile(String(userProfileId), field, (event.target as HTMLInputElement).value)
+    }
+  }
 
   ngOnDestroy(): void {
     this.userProfileSubscription.unsubscribe()
+    this.userStickersSubscription.unsubscribe()
   }
 
 }
