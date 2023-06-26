@@ -1,6 +1,43 @@
 <div style="margin:40px auto; width:80%;">
   <h2 style="text-align: center;">Customer Homepage</h2>
 
+  <div style="background-color: lightgray; padding:15px; border-radius:5px; border: 1px solid black;">
+    <p style="text-align: center; font-weight: bold; font-size:1.5rem; margin:10px 0px">Contact Information</p>
+    <!-- <p style="position:absolute; top:2px; right:5px;"> Click box for what info you want shared when people scan your STIQR</p> -->
+    <div style="display:grid; grid-template-columns: 4fr 1fr; margin-bottom:10px;">
+      <br>
+      <p style="text-align: center; margin:0px;">Show always</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 3fr 1fr; row-gap: 10px;">
+
+      <p style="margin:0px;">Name</p>
+      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text"
+        value="{{userProfile?.name}}" (change)="changeInput($event, userProfile?.id, 'name')">
+      <mat-slide-toggle [checked]="userProfile?.shareNameAlways" style="margin-left:auto; margin-right:auto; width:40px;"
+        (change)="toggleSlide($event, userProfile?.id, 'shareNameAlways')"></mat-slide-toggle>
+
+      <p style="margin:0px;">Phone</p>
+      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text"
+        value="{{userProfile?.number}}" (change)="changeInput($event, userProfile?.id, 'number')">
+      <mat-slide-toggle [checked]="userProfile?.shareNumberAlways" style="margin-left:auto; margin-right:auto; width:40px;"
+        (change)="toggleSlide($event, userProfile?.id, 'shareNumberAlways')"></mat-slide-toggle>
+
+      <p style="margin:0px;">Email</p>
+      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text"
+        value="{{userProfile?.email}}" (change)="changeInput($event, userProfile?.id, 'email')">
+      <mat-slide-toggle [checked]="userProfile?.shareEmailAlways" style="margin-left:auto; margin-right:auto; width:40px;"
+        (change)="toggleSlide($event, userProfile?.id, 'shareEmailAlways')"></mat-slide-toggle>
+
+      <p style="margin:0px;">Social Media Link</p>
+      <input style="width:auto; border: 0px; background-color: lightgray; border-bottom: 1px solid black;" type="text"
+        value="{{userProfile?.link}}" (change)="changeInput($event, userProfile?.id, 'link')">
+      <mat-slide-toggle [checked]="userProfile?.shareLinkAlways" style="margin-left:auto; margin-right:auto; width:40px;"
+        (change)="toggleSlide($event, userProfile?.id, 'shareLinkAlways')"></mat-slide-toggle>
+
+    </div>
+  </div>
+
   <div style="margin:10px 0px;">
     <p style="display:inline">How to Connect your QR sticker</p>
     <button mat-raised-button style="display:inline; background-color: blue; color:white; margin-left:30px;">Register Sticker</button>
@@ -10,10 +47,25 @@
     <h2 style="text-align: center; margin-bottom:auto; margin-top:auto">Your Connected Sticker Products</h2>
   </div>
 
-  <div style="display:grid; grid-template-columns:250px 1fr; margin:20px 0px; background-color: #E0DFD5; border:1px solid black">
-    <img src="https://loremflickr.com/200/200/mountains" alt="scenery" style="margin:20px;">
-  </div>
+  <!-- <div style="display:grid; grid-template-columns:250px 1fr; margin:20px 0px; background-color: #E0DFD5; border:1px solid black"> -->
+  <!-- <img src="https://loremflickr.com/200/200/mountains" alt="scenery" style="margin:20px;"> -->
+  <!-- <p *ngFor="let sticker of userStickers">{{sticker.name}}</p> -->
+  <!-- </div> -->
+  <mat-grid-list cols="3">
+    <mat-grid-tile *ngFor="let sticker of userStickers">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>{{sticker.name}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="https://loremflickr.com/200/200/mountains" alt="scenery">
+        <mat-card-actions>
+          <mat-slide-toggle [checked]="sticker.lost"
+            (change)="toggleSlideSticker($event, sticker.id, 'lost')">Lost</mat-slide-toggle>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-  <button mat-raised-button style="background-color: #F09D51; color:white" routerLink="/">Logout</button>
+  <button mat-raised-button style="background-color: #F09D51; color:white" (click)="auth.logout()">Logout</button>
 
 </div>

@@ -1,12 +1,13 @@
 import { OnDestroy, inject, Injectable } from '@angular/core';
 import { Auth, AuthProvider, FacebookAuthProvider, GoogleAuthProvider, User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, user } from '@angular/fire/auth';
-import { Subscription } from 'rxjs';
+import { NEVER, Subscription, switchMap } from 'rxjs';
+import { DbService } from './db.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class authService implements OnDestroy{
+export class AuthService implements OnDestroy {
 
   // signUp_username: string = "";
   // signUp_password: string = "";
@@ -21,11 +22,14 @@ export class authService implements OnDestroy{
   user: User | null = null;
   userSubscription: Subscription;
 
-  constructor() {
-    this.userSubscription = this.user$.subscribe((aUser: User | null) => {
+  constructor(
+    public db: DbService
+  ) {
+    this.userSubscription = this.user$.subscribe((user: User | null) => {
       //handle user state changes here. Note, that user will be null if there is no currently logged in user.
       // console.log("aUser:", aUser);
-      this.user = aUser;
+      this.user = user;
+      if (user) { this.db.initializeUser(user) }
     })
   }
 

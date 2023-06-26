@@ -29,12 +29,14 @@
   font-size:30px;
   font-weight:500;
   margin-top:0px;
+  text-shadow: 0px 0px 5px black;
 }
 .slideshow-text{
   font-size:20px;
   width:400px;
   margin-right:auto;
-  margin-left:auto
+  margin-left:auto;
+  text-shadow: 0px 0px 5px black;
 }
 
 /* Next & previous buttons */
@@ -93,12 +95,13 @@
 }
 
 .text-bar{
-  background-color:#E0DFD5;
-  width:1000px;
+  background-color:#CDE8F6;
+  width: 400px;
   margin:20px auto 10px;
   padding:5px;
   border:solid 1px black;
   text-align: center;
+  border-radius:4px;
 }
 @media screen and (max-width:1000px) {
   .text-bar{
