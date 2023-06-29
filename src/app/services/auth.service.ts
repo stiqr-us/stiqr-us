@@ -19,17 +19,17 @@ export class AuthService implements OnDestroy {
 
   private auth: Auth = inject(Auth);
   user$ = user(this.auth);
-  user: User | null = null;
-  userSubscription: Subscription;
+  // user: User | null = null;
+  userInitializationSubscription: Subscription;
 
   constructor(
     public db: DbService
   ) {
-    this.userSubscription = this.user$.subscribe((user: User | null) => {
+    this.userInitializationSubscription = this.user$.subscribe((user: User | null) => {
       //handle user state changes here. Note, that user will be null if there is no currently logged in user.
       // console.log("aUser:", aUser);
-      this.user = user;
-      if (user) { this.db.initializeUser(user) }
+      // this.user = user;
+      if (!!user) { this.db.initializeUser(user) }
     })
   }
 
@@ -58,6 +58,6 @@ export class AuthService implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userSubscription.unsubscribe();
+    this.userInitializationSubscription.unsubscribe();
   }
 }
