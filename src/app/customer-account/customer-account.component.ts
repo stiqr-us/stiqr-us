@@ -16,12 +16,12 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 export class CustomerAccountComponent implements OnDestroy {
   // Here's a wireframe idea https://wireframe.cc/f3vxRj
 
-  user: User | null = null;
+  // user: User | null = null;
   userProfile$: Observable<UserProfile> | undefined;
   userStickers$: Observable<Sticker[]> | undefined;
   // userProfile: UserProfile | undefined;
   // userStickers: Sticker[] | undefined;
-  userSubscription: any;
+  userSubscription:Subscription;
 
   // userProfileSubscription: Subscription;
   // userStickersSubscription: Subscription;
