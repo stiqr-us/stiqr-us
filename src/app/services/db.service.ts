@@ -4,7 +4,7 @@ import { User } from '@angular/fire/auth'
 import { UserProfile } from './user-profile';
 import { Sticker } from './sticker';
 import { StickerLocation } from './sticker-location';
-import { Observable, of, switchMap } from 'rxjs';
+import { Observable, ObservedValueOf, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +56,7 @@ export class DbService {
 
   checkUserProfileExists$(userId: string): Observable<boolean> {
     return this.getUserProfile$(userId).pipe(switchMap((userProfile: UserProfile) => {
-      if (userProfile) {
+      if (!!userProfile.id) {
         return of(true);
       } else {
         return of(false);
@@ -65,9 +65,9 @@ export class DbService {
   }
 
   updateUserProfile(userId: string, field: string, fieldValue: string | null | boolean): void {
-    if (fieldValue == "") {
+    if (!fieldValue) { // same as fieldValue == ''
       let fieldValue = null
-    } else if (field == "name" && fieldValue == "") {
+    } else if (field == "name" && !fieldValue) {
       // TODO: Tell user they can't have null values
       alert('Name can\'t be empty')
       return
@@ -86,6 +86,30 @@ export class DbService {
     // })
     // return stickers
   // }
+
+  getSticker$(stickerId: string): Observable<Sticker> {
+    return docData(doc(this.stickersCollection, stickerId), {idField: 'id'}) as Observable<Sticker>;
+  }
+
+  checkStickerExists$(stickerId: string): Observable<boolean> {
+    return this.getSticker$(stickerId).pipe(switchMap((sticker: Sticker) => {
+      if (!!sticker.id) {
+        return of(true);
+      } else {
+        return of(false);
+      }
+    }))
+  }
+
+  checkStickerOwned$(stickerId: string): Observable<boolean> {
+    return this.getSticker$(stickerId).pipe(switchMap((sticker: Sticker) => {
+      if (!!sticker.userId) {
+        return of(true)
+      } else {
+        return of(false)
+      }
+    }))
+  }
 
   getStickersForUser$(userId: string): Observable<Sticker[]> {
     return collectionData(query(this.stickersCollection, where("userId", "==", userId)), {idField: 'id'}) as Observable<Sticker[]>
