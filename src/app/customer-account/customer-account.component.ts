@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { DbService } from '../services/db.service';
-import { User, createUserWithEmailAndPassword } from 'firebase/auth';
-import { NEVER, Observable, Subscription, of, throwError } from 'rxjs';
-import { switchMap } from 'rxjs/operators'
+import { User } from 'firebase/auth';
+import { Observable, Subscription } from 'rxjs';
 import { UserProfile } from '../services/user-profile';
 import { Sticker } from '../services/sticker';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
@@ -21,7 +20,7 @@ export class CustomerAccountComponent implements OnDestroy {
   userStickers$: Observable<Sticker[]> | undefined;
   // userProfile: UserProfile | undefined;
   // userStickers: Sticker[] | undefined;
-  userSubscription:Subscription;
+  userSub: Subscription;
 
   // userProfileSubscription: Subscription;
   // userStickersSubscription: Subscription;
@@ -30,7 +29,7 @@ export class CustomerAccountComponent implements OnDestroy {
     public auth: AuthService,
     public db: DbService
   ) {
-    this.userSubscription = this.auth.user$.subscribe((user: User | null) => {
+    this.userSub = this.auth.user$.subscribe((user: User | null) => {
       if (!!user) {
         this.userProfile$ = this.db.getUserProfile$(user.uid);
         this.userStickers$ = this.db.getStickersForUser$(user.uid);
@@ -100,7 +99,7 @@ export class CustomerAccountComponent implements OnDestroy {
   ngOnDestroy(): void {
     // this.userProfileSubscription.unsubscribe()
     // this.userStickersSubscription.unsubscribe()
-    this.userSubscription.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
 }
