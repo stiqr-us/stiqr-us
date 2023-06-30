@@ -23,50 +23,34 @@ export class DbService {
     // this.stickers$ = collectionData(this.stickersCollection, {idField: 'id'}) as Observable<Sticker[]>;
   }
 
-  initializeUser(user: User): void {
-    this.checkUserProfileExists$(user.uid).subscribe((exists: boolean) => {
-      if (!exists) {
-        this.addUserProfile({
-          id: user.uid,
+  initUser(user: User): void {
+    this.addUserProfile(user.uid, {
+      name: user.displayName || "Anonymous",
+      shareNameAlways: true,
 
-          name: String(user.displayName),
-          shareNameAlways: true,
+      email: user.email || undefined,
+      shareEmailAlways: true,
 
-          email: user.email,
-          shareEmailAlways: true,
+      number: user.phoneNumber || undefined,
+      shareNumberAlways: true,
 
-          number: user.phoneNumber,
-          shareNumberAlways: true,
-
-          link: null,
-          shareLinkAlways: true,
-        })
-      }
+      link: undefined,
+      shareLinkAlways: true,
     })
   }
 
-  addUserProfile(user: UserProfile): void {
-    delete user.admin;
-    setDoc(doc(this.userProfilesCollection, user.id), user);
+  addUserProfile(userId: string, userProfile: UserProfile): void {
+    userProfile.admin = undefined;
+    setDoc(doc(this.userProfilesCollection, userId), userProfile);
   }
 
   getUserProfile$(userId: string): Observable<UserProfile> {
     return docData(doc(this.userProfilesCollection, userId), {idField: 'id'}) as Observable<UserProfile>;
   }
 
-  checkUserProfileExists$(userId: string): Observable<boolean> {
-    return this.getUserProfile$(userId).pipe(switchMap((userProfile: UserProfile) => {
-      if (!!userProfile.id) {
-        return of(true);
-      } else {
-        return of(false);
-      }
-    }))
-  }
-
-  updateUserProfile(userId: string, field: string, fieldValue: string | null | boolean): void {
+  updateUserProfile(userId: string, field: string, fieldValue: string | boolean): void {
     if (!fieldValue) { // same as fieldValue == ''
-      let fieldValue = null
+      let fieldValue = undefined
     } else if (field == "name" && !fieldValue) {
       // TODO: Tell user they can't have null values
       alert('Name can\'t be empty')
@@ -79,49 +63,13 @@ export class DbService {
     addDoc(this.stickersCollection, sticker)
   }
 
-  // async getStickersForUser(userId: string): Promise<Sticker[]> {
-    // let stickers: Sticker[] = [];
-    // (await getDocs(query(this.stickersCollection, where("userId", "==", userId)))).docs.forEach(doc => {
-    //   stickers.push(doc.data() as Sticker)
-    // })
-    // return stickers
-  // }
-
   getSticker$(stickerId: string): Observable<Sticker> {
     return docData(doc(this.stickersCollection, stickerId), {idField: 'id'}) as Observable<Sticker>;
-  }
-
-  checkStickerExists$(stickerId: string): Observable<boolean> {
-    return this.getSticker$(stickerId).pipe(switchMap((sticker: Sticker) => {
-      if (!!sticker.id) {
-        return of(true);
-      } else {
-        return of(false);
-      }
-    }))
-  }
-
-  checkStickerOwned$(stickerId: string): Observable<boolean> {
-    return this.getSticker$(stickerId).pipe(switchMap((sticker: Sticker) => {
-      if (!!sticker.userId) {
-        return of(true)
-      } else {
-        return of(false)
-      }
-    }))
   }
 
   getStickersForUser$(userId: string): Observable<Sticker[]> {
     return collectionData(query(this.stickersCollection, where("userId", "==", userId)), {idField: 'id'}) as Observable<Sticker[]>
   }
-
-  // async getStickersNotPrinted(): Promise<Sticker[]> {
-  //   let stickers: Sticker[] = [];
-  //   (await getDocs(query(this.stickersCollection, where("printed", "==", false)))).docs.forEach(doc => {
-  //     stickers.push(doc.data() as Sticker)
-  //   })
-  //   return stickers
-  // }
 
   getStickersNotPrinted$(): Observable<Sticker[]> {
     return collectionData(query(this.stickersCollection, where("printed", "==", false)), {idField: 'id'}) as Observable<Sticker[]>
@@ -132,9 +80,8 @@ export class DbService {
   }
 
   updateStickerLocation(sticker: Sticker, location: StickerLocation): void {
-    // deep copy to ensure proper updating
-    let locations = Object.assign([], sticker.locations)
-    locations.push(location)
-    updateDoc(doc(this.stickersCollection, sticker.id), { locations: locations })
+    if (!sticker.locations) {sticker.locations = []}
+    sticker.locations.push(location)
+    updateDoc(doc(this.stickersCollection, sticker.id), { locations: sticker.locations })
   }
 }

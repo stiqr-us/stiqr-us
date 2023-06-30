@@ -9,12 +9,12 @@ export interface UserProfile {
   name: string,
   shareNameAlways: boolean,
 
-  email: string | null,
+  email?: string,
   shareEmailAlways: boolean,
 
-  number: string | null,
+  number?: string,
   shareNumberAlways: boolean,
 
-  link: string | null,
+  link?: string,
   shareLinkAlways: boolean
 }
