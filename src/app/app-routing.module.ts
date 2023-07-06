@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnDestroy } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { LoginComponent } from './login/login.component';
@@ -7,6 +7,9 @@ import { CustomerAccountComponent } from './customer-account/customer-account.co
 import { OurMissionComponent } from './our-mission/our-mission.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { FAQComponent } from './faq/faq.component';
+import { AuthService } from './services/auth.service';
+import { Subscription } from 'rxjs';
+import { User } from '@angular/fire/auth';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -23,4 +26,25 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule implements OnDestroy{
+
+  userSub:Subscription;
+  user:User | null = null;
+
+  constructor(public auth:AuthService) {
+    this.userSub = this.auth.user$.subscribe((user) => {
+      this.user = user;
+
+    })
+  }
+
+  isAuthenticated() {
+    if (this.user) {
+
+    }
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
+}

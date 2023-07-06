@@ -26,11 +26,14 @@
 
   <div class="log-in">
     <button mat-button class="signUpBtn"><a routerLink="/signup" style="text-decoration: none; color: white;">Sign Up</a></button>
-    <button mat-button class="LoginBtn"><a routerLink="/login" style="text-decoration: none; color: white;">Login</a></button>
+    <button mat-button class="LoginBtn"><a routerLink="/login" style="text-decoration: none; color: white;" *ngIf="user$ | async">Login</a></button>
+    <button mat-button class="LoginBtn"><a routerLink="/" style="text-decoration: none; color: white;" *ngIf="!(user$ | async)">Logout</a></button>
   </div>
 </div>
 
 <router-outlet></router-outlet>
+
+<!-- <button (click)="testFunction()">Test Button</button> -->
 
 <div>
   <div style="background-color: #E0DFD5; color:black; padding:10px 5%">
