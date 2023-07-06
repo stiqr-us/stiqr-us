@@ -1,17 +1,15 @@
 import { NgModule, OnDestroy } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { CustomerAccountComponent } from './customer-account/customer-account.component';
-import { OurMissionComponent } from './our-mission/our-mission.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
-import { FAQComponent } from './faq/faq.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { CustomerAccountComponent } from './components/customer-account/customer-account.component';
+import { OurMissionComponent } from './components/our-mission/our-mission.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { FAQComponent } from './components/faq/faq.component';
 import { AuthService } from './services/auth.service';
-import { Subscription } from 'rxjs';
-import { User } from '@angular/fire/auth';
 import { AuthGuardService } from './services/routing-guard.service';
-import { AuthGuard } from '@angular/fire/auth-guard';
+import { StiqrComponent } from './components/stiqr/stiqr.component';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
@@ -21,6 +19,7 @@ const routes: Routes = [
   {path: 'our-mission', component: OurMissionComponent},
   {path: 'contact-us', component: ContactUsComponent},
   {path: 'FAQ', component: FAQComponent},
+  {path: 'stiqr/:id', component: StiqrComponent},
   {path: '**', redirectTo: ''}
 ];
 
@@ -28,25 +27,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule implements OnDestroy{
+export class AppRoutingModule{
 
-  // userSub:Subscription;
-  // user:User | null = null;
-
-  constructor(public auth:AuthService) {
-    // this.userSub = this.auth.user$.subscribe((user) => {
-    //   this.user = user;
-
-    // })
-  }
-
-  // isAuthenticated() {
-  //   if (this.user) {
-
-  //   }
-  // }
-
-  ngOnDestroy() {
-    // this.userSub.unsubscribe();
-  }
+  constructor(public auth:AuthService) {}
 }
