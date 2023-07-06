@@ -1,9 +1,9 @@
 import { Injectable, inject } from '@angular/core';
 import { CollectionReference, Firestore, addDoc, collection, collectionData, doc, docData, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
 import { User } from '@angular/fire/auth'
-import { UserProfile } from './user-profile';
-import { Sticker } from './sticker';
-import { StickerLocation } from './sticker-location';
+import { UserProfile } from '../types/user-profile';
+import { Sticker } from '../types/sticker';
+import { StickerLocation } from '../types/sticker-location';
 import { Observable, ObservedValueOf, of, switchMap } from 'rxjs';
 
 @Injectable({

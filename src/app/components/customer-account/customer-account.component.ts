@@ -3,8 +3,8 @@ import { AuthService } from '../../services/auth.service';
 import { DbService } from '../../services/db.service';
 import { User } from 'firebase/auth';
 import { Observable, Subscription } from 'rxjs';
-import { UserProfile } from '../../services/user-profile';
-import { Sticker } from '../../services/sticker';
+import { UserProfile } from '../../types/user-profile';
+import { Sticker } from '../../types/sticker';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({

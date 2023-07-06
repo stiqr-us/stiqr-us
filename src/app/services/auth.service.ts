@@ -2,7 +2,7 @@ import { OnDestroy, inject, Injectable } from '@angular/core';
 import { Auth, AuthProvider, FacebookAuthProvider, GoogleAuthProvider, User, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, user } from '@angular/fire/auth';
 import { BehaviorSubject, NEVER, Subject, Subscription, of, switchMap, zip } from 'rxjs';
 import { DbService } from './db.service';
-import { UserProfile } from './user-profile';
+import { UserProfile } from '../types/user-profile';
 import { Router } from '@angular/router';
 
 
