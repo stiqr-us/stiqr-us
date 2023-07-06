@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { AuthProvider } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
