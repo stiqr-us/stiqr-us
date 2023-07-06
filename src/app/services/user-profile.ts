@@ -1,6 +1,5 @@
 export interface UserProfile {
   id?: string,
-  admin?: boolean,
 
   // shareXxxAlways: If true display always,
   // If false only display when lost.

@@ -40,7 +40,6 @@ export class DbService {
   }
 
   addUserProfile(userId: string, userProfile: UserProfile): void {
-    userProfile.admin = undefined;
     setDoc(doc(this.userProfilesCollection, userId), userProfile);
   }
 
