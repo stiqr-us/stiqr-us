@@ -8,11 +8,11 @@ import {
   UrlTree
 } from "@angular/router";
 import { Observable, Subscription, of, switchMap } from "rxjs";
-import { AuthService } from "./auth.service";
+import { AuthService } from "../../services/auth.service";
 import { User } from "@angular/fire/auth";
 
 @Injectable()
-export class AuthGuardService implements CanActivate, CanActivateChild, OnDestroy {
+export class CustomerAccountGuard implements CanActivate, CanActivateChild, OnDestroy {
 
   userSub:Subscription;
   user:User | null = null;

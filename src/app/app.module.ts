@@ -22,7 +22,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore, initializeFirestore } from '@angular/fire/firestore';
 import { StiqrComponent } from './components/stiqr/stiqr.component';
-import { AuthGuardService } from './services/routing-guard.service';
+import { CustomerAccountGuard } from './components/customer-account/customer-account.guard';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import { AuthGuardService } from './services/routing-guard.service';
     provideAuth(() => getAuth()),
     provideFirestore(() => initializeFirestore(getApp(), {ignoreUndefinedProperties: true}))
   ],
-  providers: [AuthGuardService],
+  providers: [CustomerAccountGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
