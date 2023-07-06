@@ -11,14 +11,5 @@ import { AuthService } from './services/auth.service';
 export class AppComponent {
   title = 'stiqr-us';
 
-  // user$:Subject<User | null>;
-
-  constructor(public auth: AuthService) {
-
-    // this.user$ = this.auth.user$;
-  }
-
-  // loginClicked() {
-
-  // }
+  constructor(public auth: AuthService) {}
 }

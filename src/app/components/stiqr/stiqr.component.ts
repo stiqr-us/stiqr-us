@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StiqrComponent implements OnInit{
 
+  // This is the variable that contains the "id" parameter
   id:any;
 
   constructor(private route: ActivatedRoute) { }
