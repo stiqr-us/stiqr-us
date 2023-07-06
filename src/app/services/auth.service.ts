@@ -26,10 +26,6 @@ export class AuthService implements OnDestroy {
   private userInitSub: Subscription;
   // user:UserCredential|undefined;
 
-  // # Code added by Spencer Birch
-  userCheckSub: Subscription
-  user:User | null = null;
-
   constructor(
     public db: DbService, private router: Router
   ) {
@@ -47,15 +43,6 @@ export class AuthService implements OnDestroy {
         this.db.initUser(user)
       }
     })
-
-    // # Code added by Spencer Birch
-    this.userCheckSub = this.user$.subscribe((user) => {
-      this.user = user;
-    })
-  }
-
-  async authenticateUser() {
-
   }
 
   // AccountCreated(userPass: string[]) {

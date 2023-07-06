@@ -21,6 +21,7 @@ import { getApp, initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore, initializeFirestore } from '@angular/fire/firestore';
+import { StiqrComponent } from './stiqr/stiqr.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { provideFirestore, initializeFirestore } from '@angular/fire/firestore';
     SignUpComponent,
     OurMissionComponent,
     FAQComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    StiqrComponent
   ],
   imports: [
     BrowserModule,
