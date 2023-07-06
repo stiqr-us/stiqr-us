@@ -10,12 +10,14 @@ import { FAQComponent } from './faq/faq.component';
 import { AuthService } from './services/auth.service';
 import { Subscription } from 'rxjs';
 import { User } from '@angular/fire/auth';
+import { AuthGuardService } from './services/routing-guard.service';
+import { AuthGuard } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {path: '', component: HomepageComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignUpComponent},
-  {path: 'customer', component: CustomerAccountComponent},
+  {path: 'customer', canActivate: [AuthGuardService], component: CustomerAccountComponent},
   {path: 'our-mission', component: OurMissionComponent},
   {path: 'contact-us', component: ContactUsComponent},
   {path: 'FAQ', component: FAQComponent},
@@ -28,23 +30,23 @@ const routes: Routes = [
 })
 export class AppRoutingModule implements OnDestroy{
 
-  userSub:Subscription;
-  user:User | null = null;
+  // userSub:Subscription;
+  // user:User | null = null;
 
   constructor(public auth:AuthService) {
-    this.userSub = this.auth.user$.subscribe((user) => {
-      this.user = user;
+    // this.userSub = this.auth.user$.subscribe((user) => {
+    //   this.user = user;
 
-    })
+    // })
   }
 
-  isAuthenticated() {
-    if (this.user) {
+  // isAuthenticated() {
+  //   if (this.user) {
 
-    }
-  }
+  //   }
+  // }
 
   ngOnDestroy() {
-    this.userSub.unsubscribe();
+    // this.userSub.unsubscribe();
   }
 }

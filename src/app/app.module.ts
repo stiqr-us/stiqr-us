@@ -21,6 +21,8 @@ import { getApp, initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore, initializeFirestore } from '@angular/fire/firestore';
+import { StiqrComponent } from './stiqr/stiqr.component';
+import { AuthGuardService } from './services/routing-guard.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { provideFirestore, initializeFirestore } from '@angular/fire/firestore';
     SignUpComponent,
     OurMissionComponent,
     FAQComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    StiqrComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +49,7 @@ import { provideFirestore, initializeFirestore } from '@angular/fire/firestore';
     provideAuth(() => getAuth()),
     provideFirestore(() => initializeFirestore(getApp(), {ignoreUndefinedProperties: true}))
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
