@@ -16,6 +16,8 @@ export class HomepageComponent implements OnInit {
   constructor(private auth:AuthService) {}
 
   ngOnInit() {
+    // I added this because when reloading the customer page, the user is redirected here by the guard Service
+    // even though they are logged in.
     this.auth.logout();
   }
 
