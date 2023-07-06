@@ -1,6 +1,6 @@
 import { OnDestroy, inject, Injectable } from '@angular/core';
 import { Auth, AuthProvider, FacebookAuthProvider, GoogleAuthProvider, User, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, user } from '@angular/fire/auth';
-import { NEVER, Subject, Subscription, of, switchMap, zip } from 'rxjs';
+import { BehaviorSubject, NEVER, Subject, Subscription, of, switchMap, zip } from 'rxjs';
 import { DbService } from './db.service';
 import { UserProfile } from './user-profile';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ export class AuthService implements OnDestroy {
 
   private auth: Auth = inject(Auth);
   #user$ = user(this.auth);
-  user$ = new Subject<User | null>();
+  user$ = new BehaviorSubject<User | null>(null);
   private userSub: Subscription;
   private userInitSub: Subscription;
   // user:UserCredential|undefined;
@@ -32,6 +32,7 @@ export class AuthService implements OnDestroy {
     this.userSub = this.#user$.subscribe(this.user$)
     this.userInitSub = this.user$.pipe(
       switchMap((user: User | null) => {
+        // console.log(user);
         if (!!user) {
           return zip(of(user), this.db.getUserProfile$(user.uid))
         } else {
@@ -80,6 +81,7 @@ export class AuthService implements OnDestroy {
 
   async logout() {
     // console.log("logout");
+    this.router.navigate(['/']);
     return await signOut(this.auth)
   }
 
