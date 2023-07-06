@@ -1,8 +1,9 @@
 import { OnDestroy, inject, Injectable } from '@angular/core';
-import { Auth, AuthProvider, FacebookAuthProvider, GoogleAuthProvider, User, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, user } from '@angular/fire/auth';
+import { Auth, AuthProvider, FacebookAuthProvider, GoogleAuthProvider, User, UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, signOut, user } from '@angular/fire/auth';
 import { NEVER, Subject, Subscription, of, switchMap, zip } from 'rxjs';
 import { DbService } from './db.service';
 import { UserProfile } from './user-profile';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -23,9 +24,14 @@ export class AuthService implements OnDestroy {
   user$ = new Subject<User | null>();
   private userSub: Subscription;
   private userInitSub: Subscription;
+  // user:UserCredential|undefined;
+
+  // # Code added by Spencer Birch
+  userCheckSub: Subscription
+  user:User | null = null;
 
   constructor(
-    public db: DbService
+    public db: DbService, private router: Router
   ) {
     this.userSub = this.#user$.subscribe(this.user$)
     this.userInitSub = this.user$.pipe(
@@ -41,6 +47,15 @@ export class AuthService implements OnDestroy {
         this.db.initUser(user)
       }
     })
+
+    // # Code added by Spencer Birch
+    this.userCheckSub = this.user$.subscribe((user) => {
+      this.user = user;
+    })
+  }
+
+  async authenticateUser() {
+
   }
 
   // AccountCreated(userPass: string[]) {
@@ -58,8 +73,22 @@ export class AuthService implements OnDestroy {
     return await signInWithEmailAndPassword(this.auth, email, password)
   }
   async loginProvider(provider: AuthProvider) {
+
+    // const user = await signInWithPopup(this.auth, provider);
+    // if(user && user.user.email) {
+    //   this.router.navigate(['/customer']);
+
+    //   console.log(user.user);
+    //   console.log("Success");
+    // } else {
+
+    //   console.log(user);
+    //   console.log("Fail");
+    // }
+
     // console.log("login provider");
-    return await signInWithPopup(this.auth, provider)
+    // console.log(await signInWithPopup(this.auth, provider));
+    return await signInWithPopup(this.auth, provider);
   }
 
   async logout() {

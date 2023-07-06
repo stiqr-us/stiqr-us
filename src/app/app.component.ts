@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Auth, AuthProvider, createUserWithEmailAndPassword, GoogleAuthProvider, User, signInWithPopup, signOut, user, signInWithEmailAndPassword, FacebookAuthProvider } from '@angular/fire/auth';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -24,13 +25,21 @@ export class AppComponent {
   // user: User | null = null;
   // userSubscription: Subscription;
 
-  constructor() {
+  user$:Subject<User | null>;
+
+  constructor(private auth: AuthService) {
+
+    this.user$ = this.auth.user$;
     // this.userSubscription = this.user$.subscribe((aUser: User | null) => {
     //   //handle user state changes here. Note, that user will be null if there is no currently logged in user.
     //   console.log("aUser:", aUser);
     //   this.user = aUser;
     // })
   }
+
+  // testFunction() {
+  //   this.user$.subscribe();
+  // }
 
   // loginClicked() {
   //   this.currentPage = "login";
