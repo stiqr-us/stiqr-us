@@ -14,10 +14,11 @@
     </div>
   </div>
 
-  <div class="log-in">
-    <button mat-button class="signUpBtn"><a routerLink="/signup" style="text-decoration: none; color: white;">Sign Up</a></button>
+  <div class="navButtons">
     <button mat-button class="LoginBtn" *ngIf="!(auth.user$ | async)"><a routerLink="/login" style="text-decoration: none; color: white;">Login</a></button>
     <button mat-button class="LoginBtn" *ngIf="auth.user$ | async" (click)="auth.logout()"><a style="text-decoration: none; color: white;">Logout</a></button>
+    <button mat-button class="signUpBtn"><a routerLink="/signup" style="text-decoration: none; color: white;">Sign Up</a></button>
+    <button mat-button class="LoginBtn" *ngIf="router.url === '/' && (auth.user$ | async)"><a routerLink="/customer" style="text-decoration: none; color: white;">My Account</a></button>
   </div>
 </div>
 
