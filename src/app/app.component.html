@@ -14,14 +14,38 @@
     </div>
   </div>
 
-  <div class="log-in">
-    <button mat-button class="signUpBtn"><a routerLink="/signup" style="text-decoration: none; color: white;">Sign Up</a></button>
-    <button mat-button class="LoginBtn" *ngIf="!(auth.user$ | async)"><a routerLink="/login" style="text-decoration: none; color: white;">Login</a></button>
-    <button mat-button class="LoginBtn" *ngIf="auth.user$ | async" (click)="logoutHandler()"><a style="text-decoration: none; color: white;">Logout</a></button>
+  <div class="navButtons">
+    <button mat-button class="LoginBtn"
+      routerLink="/login"
+      *ngIf="!(auth.user$ | async)">
+        <a style="text-decoration: none; color: white;">Login</a>
+    </button>
+    <button mat-button class="LoginBtn"
+      *ngIf="auth.user$ | async" (click)="logoutModal()">
+        <a style="text-decoration: none; color: white;">Logout</a>
+    </button>
+    <button mat-button class="signUpBtn"
+      routerLink = "/signup">
+        <a style="text-decoration: none; color: white;">Sign Up</a>
+    </button>
+    <button mat-button class="LoginBtn"
+      routerLink="/customer"
+      *ngIf="router.url !== '/customer' && (auth.user$ | async)">
+        <a style="text-decoration: none; color: white;">My Account</a>
+    </button>
+    <!-- <p *ngIf="router.url === '/customer' && (auth.user$ | async)">Welcome {{name}}</p> -->
   </div>
 </div>
 
 <router-outlet></router-outlet>
+
+<div class="logoutModalBackgroud" *ngIf="logoutModalDisplay">
+  <div class="logoutWhiteBlock">
+    <p>Confirm Logout</p>
+    <button mat-button class="signUpBtn" (click)="logoutModalDisplay = false">Exit</button>
+    <button mat-button style="background-color: red;" (click)="confirmedLogout()">Confirm Logout</button>
+  </div>
+</div>
 
 <div>
   <div style="background-color: #E0DFD5; color:black; padding:10px 5%">

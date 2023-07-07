@@ -6,7 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent implements OnInit {
+// export class HomepageComponent implements OnInit {
+export class HomepageComponent {
   slideIndex:number = 1;
 
   displaySlideshow1:boolean = false;
@@ -15,11 +16,11 @@ export class HomepageComponent implements OnInit {
 
   constructor(public auth:AuthService) {}
 
-  ngOnInit() {
+  // ngOnInit() {
     // I added this because when reloading the customer page, the user is redirected here by the guard Service
     // even though they are logged in.
     // this.auth.logout();
-  }
+  // }
 
   onImage1Load(){this.displaySlideshow1 = true;}
   onImage2Load(){this.displaySlideshow2 = true;}

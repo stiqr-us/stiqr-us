@@ -4,7 +4,7 @@
   margin:none;
   padding:0px 20px 0px 30px;
   display:grid;
-  grid-template-columns: 1fr 240px;
+  grid-template-columns: 1fr 350px;
 }
 .logo {
   width:100px;
@@ -17,9 +17,15 @@
   color:white;
   margin:0px;
 }
-.log-in {
-  text-align: right;
+.navButtons {
+  // text-align: right;
+  // margin:auto 0px;
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap:50px;
+  direction: rtl;
   margin:auto 0px;
+
 }
 .nav-bar{
   display:inline-block;
@@ -30,6 +36,11 @@
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap:1px;
   max-width: 800px;
+}
+@media only screen and (max-width:800px) {
+  .nav-bar-grid{
+    grid-template-columns: 1fr 1fr;
+  }
 }
 .nav-button{
   text-align: center;
@@ -51,7 +62,7 @@
 .signUpBtn{
     background-color: #3333FF;
     color:white;
-    margin-right:20px
+    // margin-right:20px
 }
 .LoginBtn{
   background-color:#F09D51;
@@ -88,4 +99,20 @@
 .footerBox:hover{
   background-color: #313638;
   color:white;
+}
+
+.logoutModalBackgroud{
+  position:fixed;
+  height:100%;
+  width:100%;
+  top:0;
+  background-color: #00000044;
+  z-index:1
+}
+.logoutWhiteBlock{
+  background-color: white;
+  width:300px;
+  padding:30px;
+  border-radius:5px;
+  margin:50px auto;
 }
