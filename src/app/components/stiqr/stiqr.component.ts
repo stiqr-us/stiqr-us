@@ -1,23 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NEVER, Observable, switchMap } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { DbService } from 'src/app/services/db.service';
+import { Sticker } from 'src/app/types/sticker';
+import { UserProfile } from 'src/app/types/user-profile';
 
 @Component({
   selector: 'app-stiqr',
   templateUrl: './stiqr.component.html',
   styleUrls: ['./stiqr.component.scss']
 })
-export class StiqrComponent implements OnInit{
+// export class StiqrComponent implements OnInit{
+export class StiqrComponent{
 
   // This is the variable that contains the "id" parameter
-  id:any;
+  id: string;
+  sticker$: Observable<Sticker>;
+  userProfile$: Observable<UserProfile>
 
-  constructor(private route: ActivatedRoute) { }
-
-  ngOnInit() {
+  constructor(
+    private route: ActivatedRoute,
+    public db: DbService,
+    public auth: AuthService
+  ) {
     this.id = this.route.snapshot.params['id'];
+    this.sticker$ = this.db.getSticker$(this.id)
+    this.userProfile$ = this.sticker$.pipe(
+      switchMap((sticker: Sticker) => {
+        if (!!sticker) {
+          return this.db.getUserProfile$(String(sticker.userId))
+        } else {
+          return NEVER
+        }
+      })
+    )
   }
-  testFunction() {
-    console.log(this.id);
-  }
+
+  // ngOnInit() {
+  //   this.id = this.route.snapshot.params['id'];
+  // }
+
+  // testFunction() {
+  //   console.log(this.id);
+  // }
 
 }
