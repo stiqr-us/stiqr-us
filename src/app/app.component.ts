@@ -12,10 +12,21 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'stiqr-us';
 
+  // user:User | null = null;
+  name:string = '';
+
+  logoutModalDisplay:boolean = false;
+
   constructor(public auth: AuthService, public router:Router) {
     this.auth.user$.subscribe((user) => {
-      console.log("subscribing checking");
+      // this.user = user;
       console.log(user);
     })
+  }
+  logoutModal(){
+    this.logoutModalDisplay = true;
+  }
+  confirmedLogout(){
+    this.auth.logout()
   }
 }

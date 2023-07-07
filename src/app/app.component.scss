@@ -100,3 +100,19 @@
   background-color: #313638;
   color:white;
 }
+
+.logoutModalBackgroud{
+  position:fixed;
+  height:100%;
+  width:100%;
+  top:0;
+  background-color: #00000044;
+  z-index:1
+}
+.logoutWhiteBlock{
+  background-color: white;
+  width:300px;
+  padding:30px;
+  border-radius:5px;
+  margin:50px auto;
+}
