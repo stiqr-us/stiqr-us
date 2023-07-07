@@ -4,6 +4,7 @@ import { BehaviorSubject, NEVER, Subject, Subscription, of, switchMap, zip } fro
 import { DbService } from './db.service';
 import { UserProfile } from '../types/user-profile';
 import { Router } from '@angular/router';
+import { Provider } from '../types/provider';
 
 
 @Injectable({
@@ -14,22 +15,22 @@ export class AuthService implements OnDestroy {
   // signUp_username: string = "";
   // signUp_password: string = "";
 
-  providers = [
-    { "name": "Google", "type": new GoogleAuthProvider },
-    // { "name": "Facebook", "type": new FacebookAuthProvider }
+  providers: Provider[] = [
+    { name: "Google", type: new GoogleAuthProvider },
+    // { name: "Facebook", type: new FacebookAuthProvider }
   ];
 
   private auth: Auth = inject(Auth);
   #user$ = user(this.auth);
   user$ = new BehaviorSubject<User | null>(null);
-  private userSub: Subscription;
+  private userSubjectSub: Subscription;
   private userInitSub: Subscription;
   // user:UserCredential|undefined;
 
   constructor(
     public db: DbService, private router: Router
   ) {
-    this.userSub = this.#user$.subscribe(this.user$)
+    this.userSubjectSub = this.#user$.subscribe(this.user$)
     this.userInitSub = this.user$.pipe(
       switchMap((user: User | null) => {
         // console.log(user);
@@ -60,6 +61,7 @@ export class AuthService implements OnDestroy {
     // console.log("login password");
     return await signInWithEmailAndPassword(this.auth, email, password)
   }
+
   async loginProvider(provider: AuthProvider) {
 
     // const user = await signInWithPopup(this.auth, provider);
@@ -81,12 +83,12 @@ export class AuthService implements OnDestroy {
 
   async logout() {
     // console.log("logout");
-    this.router.navigate(['/']);
+    // this.router.navigate(['/']);
     return await signOut(this.auth)
   }
 
   ngOnDestroy() {
     this.userInitSub.unsubscribe()
-    this.userSub.unsubscribe()
+    this.userSubjectSub.unsubscribe()
   }
 }

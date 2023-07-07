@@ -1,6 +1,8 @@
 <div *ngIf="sticker$ | async as sticker">
   <div *ngIf="!sticker.activated">
     <p>Registration Page</p>
+    <button mat-button *ngIf="!(auth.user$ | async)"
+    (click)="loginRedirectHandler()">Login</button>
   </div>
   <div *ngIf="sticker.activated">
     <p>Finder Page</p>

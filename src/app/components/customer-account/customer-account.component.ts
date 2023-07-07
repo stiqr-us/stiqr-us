@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { UserProfile } from '../../types/user-profile';
 import { Sticker } from '../../types/sticker';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customer-account',
@@ -18,7 +19,7 @@ export class CustomerAccountComponent implements OnDestroy {
   userProfile:UserProfile | undefined;
   // user: User | null = null;
   userProfile$: Observable<UserProfile> | undefined;
-  userStickers$: Observable<Sticker[]> | undefined;
+  stickers$: Observable<Sticker[]> | undefined;
   // userProfile: UserProfile | undefined;
   // userStickers: Sticker[] | undefined;
   userSub: Subscription;
@@ -28,13 +29,16 @@ export class CustomerAccountComponent implements OnDestroy {
 
   constructor(
     public auth: AuthService,
-    public db: DbService
+    public db: DbService,
+    private router: Router
   ) {
     this.userSub = this.auth.user$.subscribe((user: User | null) => {
       if (!!user) {
 
         this.userProfile$ = this.db.getUserProfile$(user.uid);
-        this.userStickers$ = this.db.getStickersForUser$(user.uid);
+        this.stickers$ = this.db.getStickersForUser$(user.uid);
+      } else {
+        this.router.navigate(['/'])
       }
     })
     // this.userProfileSubscription = this.auth.user$.pipe(

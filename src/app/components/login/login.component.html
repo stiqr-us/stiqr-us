@@ -23,7 +23,7 @@
 
           <button class="loginBtn" mat-raised-button color="primary"
           *ngFor="let provider of auth.providers"
-          (click)="loginUser(provider)"
+          (click)="loginHandler(provider)"
           >{{provider.name}}</button>
 
           <p style="text-align:center">New to STIQR? Sign Up</p>

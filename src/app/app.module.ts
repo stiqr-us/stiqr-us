@@ -23,6 +23,7 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore, initializeFirestore } from '@angular/fire/firestore';
 import { StiqrComponent } from './components/stiqr/stiqr.component';
 import { CustomerAccountGuard } from './components/customer-account/customer-account.guard';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CustomerAccountGuard } from './components/customer-account/customer-acc
     OurMissionComponent,
     FAQComponent,
     ContactUsComponent,
-    StiqrComponent
+    StiqrComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

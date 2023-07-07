@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NEVER, Observable, switchMap } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { DbService } from 'src/app/services/db.service';
@@ -21,6 +21,7 @@ export class StiqrComponent{
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     public db: DbService,
     public auth: AuthService
   ) {
@@ -35,6 +36,10 @@ export class StiqrComponent{
         }
       })
     )
+  }
+
+  loginRedirectHandler() {
+    this.router.navigate(['/login'], { queryParams: { returnUrl: this.route.snapshot.url }})
   }
 
   // ngOnInit() {
