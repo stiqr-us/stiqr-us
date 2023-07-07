@@ -27,6 +27,7 @@ export class AppComponent {
     this.logoutModalDisplay = true;
   }
   confirmedLogout(){
+    this.logoutModalDisplay = false
     this.auth.logout()
   }
 }
