@@ -19,6 +19,7 @@ export class HomepageComponent implements OnInit {
     // I added this because when reloading the customer page, the user is redirected here by the guard Service
     // even though they are logged in.
     // this.auth.logout();
+
   }
 
   onImage1Load(){this.displaySlideshow1 = true;}
