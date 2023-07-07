@@ -17,7 +17,7 @@
   <div class="log-in">
     <button mat-button class="signUpBtn"><a routerLink="/signup" style="text-decoration: none; color: white;">Sign Up</a></button>
     <button mat-button class="LoginBtn" *ngIf="!(auth.user$ | async)"><a routerLink="/login" style="text-decoration: none; color: white;">Login</a></button>
-    <button mat-button class="LoginBtn" *ngIf="auth.user$ | async" (click)="auth.logout()"><a style="text-decoration: none; color: white;">Logout</a></button>
+    <button mat-button class="LoginBtn" *ngIf="auth.user$ | async" (click)="logoutHandler()"><a style="text-decoration: none; color: white;">Logout</a></button>
   </div>
 </div>
 

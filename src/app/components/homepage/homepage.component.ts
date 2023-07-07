@@ -13,12 +13,12 @@ export class HomepageComponent implements OnInit {
   displaySlideshow2:boolean = false;
   displaySlideshow3:boolean = false;
 
-  constructor(private auth:AuthService) {}
+  constructor(public auth:AuthService) {}
 
   ngOnInit() {
     // I added this because when reloading the customer page, the user is redirected here by the guard Service
     // even though they are logged in.
-    this.auth.logout();
+    // this.auth.logout();
   }
 
   onImage1Load(){this.displaySlideshow1 = true;}

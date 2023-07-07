@@ -12,18 +12,19 @@ import { AuthService } from "../../services/auth.service";
 import { User } from "@angular/fire/auth";
 
 @Injectable()
-export class CustomerAccountGuard implements CanActivate, CanActivateChild, OnDestroy {
+// export class CustomerAccountGuard implements CanActivate, CanActivateChild, OnDestroy {
+export class CustomerAccountGuard implements CanActivate, CanActivateChild {
 
-  userSub:Subscription;
-  user:User | null = null;
+  // userSub:Subscription;
+  // user:User | null = null;
 
   constructor(public auth:AuthService, private router:Router) {
-    this.userSub = this.auth.user$.subscribe((user) => {
-      console.log("Subscribing to User");
-      console.log(user);
+    // this.userSub = this.auth.user$.subscribe((user) => {
+    //   console.log("Subscribing to User");
+    //   console.log(user);
 
-      this.user = user;
-    })
+    //   this.user = user;
+    // })
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
@@ -68,17 +69,17 @@ export class CustomerAccountGuard implements CanActivate, CanActivateChild, OnDe
     // }
   }
 
-  isAuthenticated():boolean {
-    console.log("Trying to Authenticate");
-    console.log(this.user);
-    if (this.user) {
-      return true
-    } else {
-      return false;
-    }
-  }
+  // isAuthenticated():boolean {
+  //   console.log("Trying to Authenticate");
+  //   console.log(this.user);
+  //   if (this.user) {
+  //     return true
+  //   } else {
+  //     return false;
+  //   }
+  // }
 
-  ngOnDestroy() {
-    this.userSub.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.userSub.unsubscribe();
+  // }
 }

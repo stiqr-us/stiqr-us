@@ -12,4 +12,8 @@ export class AppComponent {
   title = 'stiqr-us';
 
   constructor(public auth: AuthService) {}
+
+  logoutHandler() {
+    this.auth.logout()
+  }
 }
