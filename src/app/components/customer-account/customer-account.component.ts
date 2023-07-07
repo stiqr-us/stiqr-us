@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { DbService } from '../../services/db.service';
 import { User } from 'firebase/auth';
@@ -14,7 +14,8 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 })
 export class CustomerAccountComponent implements OnDestroy {
   // Here's a wireframe idea https://wireframe.cc/f3vxRj
-
+  @Output() name = new EventEmitter<string>();
+  userProfile:UserProfile | undefined;
   // user: User | null = null;
   userProfile$: Observable<UserProfile> | undefined;
   userStickers$: Observable<Sticker[]> | undefined;
@@ -31,6 +32,7 @@ export class CustomerAccountComponent implements OnDestroy {
   ) {
     this.userSub = this.auth.user$.subscribe((user: User | null) => {
       if (!!user) {
+
         this.userProfile$ = this.db.getUserProfile$(user.uid);
         this.userStickers$ = this.db.getStickersForUser$(user.uid);
       }
@@ -81,6 +83,13 @@ export class CustomerAccountComponent implements OnDestroy {
     //     // TODO: add logic that will display that they have no stickers
     //   }
     // })
+  }
+
+  ngOnInit() {
+    this.userProfile$?.subscribe((userProfile) => {
+      this.userProfile = userProfile;
+      this.name.emit(this.userProfile.name);
+    })
   }
 
   toggleSlideSticker(event: MatSlideToggleChange, stickerId: string | undefined, field: string) {
