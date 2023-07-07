@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'our-mission', component: OurMissionComponent, title: 'Mission | stiQR' },
   { path: 'contact-us', component: ContactUsComponent, title: 'Contact Us | stiQR' },
   { path: 'FAQ', component: FAQComponent, title: 'FAQ | stiQR' },
-  { path: 'stiqr/:id', component: StiqrComponent},
+  { path: 'stiqr/:id', component: StiqrComponent, title: 'stiQR'},
   { path: 'admin', component: AdminComponent, title: 'Admin | stiQR', ...canActivate(adminOnly)},
   {path: '**', redirectTo: ''}
 ];
