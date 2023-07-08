@@ -1,0 +1,132 @@
+.fixedFinderBackground{
+  // position:fixed;
+  // width:100%;
+  background-color:white;
+}
+
+.finderTopSection{
+  width:100%;
+  height:60px;
+  background-color:#313638;
+}
+.finderTitle{
+  color:white;
+  font-weight: 600;
+  text-align: center;
+}
+.logo{
+  top:0%;
+  height:40px;
+  padding:10px;
+}
+.contactCardImg{
+  width:100%;
+  display:block;
+  height:auto;
+}
+.contactCardContainer{
+  position:absolute;
+  top:15%;
+  left:10%;
+  width:80%;
+  height: 80%;
+  // display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.contactLable{
+  margin:0px;
+}
+.contactLableDiv{
+  margin: auto 0px;
+}
+.contactItemDiv{
+  border-bottom: 1px solid black;
+  margin:auto 0px;
+}
+.contactItem{
+  margin:0px;
+  // text-decoration: underline;
+}
+.contactGrid{
+  display:grid;
+  grid-template-columns: auto 1fr;
+  height:80%;
+  // row-gap: 15%;
+  column-gap: 10px;
+  width:60%;
+}
+.filler{
+  margin-top:20px;
+  height:200px;
+  background: linear-gradient(0deg, lightblue 0%, white 100%);
+}
+.stickerBody{
+  width:90%;
+  margin-left:10%;
+  margin-top:20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .fixedFinderBackground{
+    // position:fixed;
+    width:100%;
+    background-color:white;
+  }
+
+  .finderTopSection{
+    // height:10%;
+    width:100%;
+    height:60px;
+    background-color:#313638;
+  }
+  .finderTitle{
+    color:white;
+    font-weight: 600;
+    // margin-left:auto;
+    // margin-right:auto;
+    text-align: center;
+  }
+  .logo{
+    top:0%;
+    height:40px;
+    padding:10px;
+  }
+  .contactLable{
+    font-size: 12px;
+  }
+  .contactItem{
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .contactLable{
+    font-size: 10px;
+  }
+  .contactItem{
+    font-size: 10px;
+  }
+}
+@media only screen and (max-height: 500px) {
+  .filler{
+    height:100px;
+  }
+  .stickerBody{
+    margin-left:5%;
+    display:grid;
+    grid-template-columns: 35% 70%;
+  }
+  // .contactCardImg{
+  //   width:80%;
+  // }
+  .contactGrid{
+    width:40%;
+  }
+  .contactLable{
+    font-size:12px;
+  }
+  .contactItem{
+    font-size:12px;
+
+  }
+}

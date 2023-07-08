@@ -14,6 +14,11 @@ import { UserProfile } from 'src/app/types/user-profile';
 // export class StiqrComponent implements OnInit{
 export class StiqrComponent{
 
+  // Test Stickers
+  // localhost:4200/stiqr/XZCxZixNZORTHYdKnWUI
+  // localhost:4200/stiqr/sxEcW4ZbfXzCdgl3Scq1
+  // localhost:4200/stiqr/vJpSQZmL9nwgAV3bumUb
+
   // This is the variable that contains the "id" parameter
   id: string;
   sticker$: Observable<Sticker>;

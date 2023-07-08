@@ -1,31 +1,78 @@
+<div class="finderTopSection">
+  <img routerLink="/" class="logo" src="./../assets/images/stiQR_logo.JPEG" alt="stiqr logo">
+</div>
+
 <div *ngIf="sticker$ | async as sticker">
   <div *ngIf="!sticker.activated">
     <p>Registration Page</p>
     <button mat-button *ngIf="!(auth.user$ | async)"
     (click)="loginRedirectHandler()">Login</button>
   </div>
-  <div *ngIf="sticker.activated">
-    <p>Finder Page</p>
-    <p>{{sticker.name}}</p>
-    <div *ngIf="userProfile$ | async as userProfile">
-      <p *ngIf="userProfile.shareNameAlways || sticker.lost; else anonymous">
-        {{userProfile.name}}
-      </p>
-      <p *ngIf="userProfile.shareNumberAlways || sticker.lost; else anonymous">
-        {{userProfile.number}}
-      </p>
-      <p *ngIf="userProfile.shareEmailAlways || sticker.lost; else anonymous">
-        {{userProfile.email}}
-      </p>
-      <p *ngIf="userProfile.shareLinkAlways || sticker.lost; else anonymous">
-        <a href="{{userProfile.link}}">{{userProfile.link}}</a>
-      </p>
+  <div *ngIf="sticker.activated" class="fixedFinderBackground">
+    <div class="stickerBody" *ngIf="userProfile$ | async as userProfile">
+      <div style="margin-right:10%;">
+        <p style="margin-top:0px;">Hi, you scanned {{userProfile.name}}'s QR code.</p>
+        <p>Please help get {{userProfile.name}}'s item back to him.</p>
+      </div>
+      <div style="position:relative; display:inline-block;">
+        <img class="contactCardImg" src="../../assets/images/Contact Card.png" alt="Contact Card Img">
+        <div class="contactCardContainer">
+          <div class="contactGrid">
+            <div class="contactLableDiv">
+              <p class="contactLable">Item: </p>
+            </div>
+            <div class="contactItemDiv">
+              <p class="contactItem">{{sticker.name}}</p>
+            </div>
+
+            <div class="contactLableDiv">
+              <p class="contactLable">Name: </p>
+            </div>
+            <div class="contactItemDiv">
+              <p class="contactItem" *ngIf="userProfile.shareNameAlways || sticker.lost; else anonymous">
+                {{userProfile.name}}
+              </p>
+            </div>
+
+            <div class="contactLableDiv">
+              <p class="contactLable">Number: </p>
+            </div>
+            <div class="contactItemDiv">
+              <p class="contactItem" *ngIf="userProfile.shareNumberAlways || sticker.lost; else anonymous">
+                {{userProfile.number}}
+              </p>
+            </div>
+
+            <div class="contactLableDiv">
+              <p class="contactLable">Email: </p>
+            </div>
+            <div class="contactItemDiv">
+              <p class="contactItem" *ngIf="userProfile.shareEmailAlways || sticker.lost; else anonymous">
+                {{userProfile.email}}
+              </p>
+            </div>
+
+            <div class="contactLableDiv">
+              <p class="contactLable">Link: </p>
+            </div>
+            <div class="contactItemDiv">
+              <p class="contactItem" *ngIf="userProfile.shareLinkAlways || sticker.lost; else anonymous">
+                <a href="{{userProfile.link}}">{{userProfile.link}}</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <div *ngIf="!(sticker$ | async)">
   <p>stiQR not found</p>
+</div>
+
+<div class="filler">
+
 </div>
 
 <ng-template #anonymous>
