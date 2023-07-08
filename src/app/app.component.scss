@@ -37,9 +37,14 @@
   grid-gap:1px;
   max-width: 800px;
 }
-@media only screen and (max-width:800px) {
+@media only screen and (max-width:700px) {
   .nav-bar-grid{
     grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (min-width:701px) and (max-width:950px){
+  .nav-bar-grid{
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 .nav-button{
@@ -131,6 +136,7 @@
 }
 @media only screen and (max-width:600px) {
   .footerGrid{
+    display:grid;
     grid-template-columns: 1fr 1fr;
   }
 }
