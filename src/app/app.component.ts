@@ -12,14 +12,12 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'stiqr-us';
 
-  // user:User | null = null;
   name:string = '';
 
   logoutModalDisplay:boolean = false;
 
   constructor(public auth: AuthService, public router:Router) {
     this.auth.user$.subscribe((user) => {
-      // this.user = user;
       console.log(user);
     })
   }

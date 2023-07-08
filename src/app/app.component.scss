@@ -116,3 +116,21 @@
   border-radius:5px;
   margin:50px auto;
 }
+.menuIcon{
+  color:white;
+}
+.footer{
+  // position:fixed;
+  width:100%;
+  bottom:0%;
+}
+.footerGrid{
+  display:grid;
+  width:100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+@media only screen and (max-width:600px) {
+  .footerGrid{
+    grid-template-columns: 1fr 1fr;
+  }
+}

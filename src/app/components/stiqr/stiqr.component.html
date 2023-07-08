@@ -4,22 +4,31 @@
     <button mat-button *ngIf="!(auth.user$ | async)"
     (click)="loginRedirectHandler()">Login</button>
   </div>
-  <div *ngIf="sticker.activated">
-    <p>Finder Page</p>
-    <p>{{sticker.name}}</p>
-    <div *ngIf="userProfile$ | async as userProfile">
-      <p *ngIf="userProfile.shareNameAlways || sticker.lost; else anonymous">
-        {{userProfile.name}}
-      </p>
-      <p *ngIf="userProfile.shareNumberAlways || sticker.lost; else anonymous">
-        {{userProfile.number}}
-      </p>
-      <p *ngIf="userProfile.shareEmailAlways || sticker.lost; else anonymous">
-        {{userProfile.email}}
-      </p>
-      <p *ngIf="userProfile.shareLinkAlways || sticker.lost; else anonymous">
-        <a href="{{userProfile.link}}">{{userProfile.link}}</a>
-      </p>
+  <div *ngIf="sticker.activated" class="fixedFinderBackground">
+    <div class="finderTopSection">
+      <img class="logo" src="./../assets/images/stiQR_logo.JPEG" alt="stiqr logo">
+      <!-- <div style="">
+        <p class="finderTitle">Finder Page</p>
+      </div> -->
+    </div>
+
+    <div>
+      <!-- <p>Hi, {{}}</p> -->
+      <p>{{sticker.name}}</p>
+      <div *ngIf="userProfile$ | async as userProfile">
+        <p *ngIf="userProfile.shareNameAlways || sticker.lost; else anonymous">
+          {{userProfile.name}}
+        </p>
+        <p *ngIf="userProfile.shareNumberAlways || sticker.lost; else anonymous">
+          {{userProfile.number}}
+        </p>
+        <p *ngIf="userProfile.shareEmailAlways || sticker.lost; else anonymous">
+          {{userProfile.email}}
+        </p>
+        <p *ngIf="userProfile.shareLinkAlways || sticker.lost; else anonymous">
+          <a href="{{userProfile.link}}">{{userProfile.link}}</a>
+        </p>
+      </div>
     </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-<div class="title-bar">
+<div class="title-bar" *ngIf="!(router.url.includes('/stiqr'))">
   <div style="display:inline-block;">
     <div class="nav-bar">
       <div class="nav-bar-grid">
@@ -10,6 +10,8 @@
         <div class="nav-button"><p class="nav-button-p">Shop</p></div>
         <div class="nav-button" routerLink="/contact-us"><p class="nav-button-p">Contact Us</p></div>
         <div class="nav-button" routerLink="/FAQ"><p class="nav-button-p">FAQ</p></div>
+
+        <!-- <mat-icon class="menuIcon" aria-hidden="false" aria-label="View Menu" fontIcon="menu" style="color:white;"></mat-icon> -->
       </div>
     </div>
   </div>
@@ -47,9 +49,9 @@
   </div>
 </div>
 
-<div>
+<div class="footer">
   <div style="background-color: #E0DFD5; color:black; padding:10px 5%">
-    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr 1fr;">
+    <div class="footerGrid">
       <div class="footerBox" routerLink="/our-mission">
         <p class="footer-text">ABOUT US</p>
       </div>
