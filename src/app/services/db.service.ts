@@ -62,6 +62,16 @@ export class DbService {
     addDoc(this.stickersCollection, sticker)
   }
 
+  connectStickerToUser(stickerId: string, userId: string, stickerName: string): void {
+    updateDoc(doc(this.stickersCollection, stickerId), {
+      activated: true,
+      userId: userId,
+      name: stickerName,
+      lost: false,
+      locations: [],
+    })
+  }
+
   getSticker$(stickerId: string): Observable<Sticker> {
     return docData(doc(this.stickersCollection, stickerId), {idField: 'id'}) as Observable<Sticker>;
   }
