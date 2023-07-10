@@ -24,6 +24,7 @@ import { provideFirestore, initializeFirestore } from '@angular/fire/firestore';
 import { StiqrComponent } from './components/stiqr/stiqr.component';
 import { CustomerAccountGuard } from './components/customer-account/customer-account.guard';
 import { AdminComponent } from './components/admin/admin.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AdminComponent } from './components/admin/admin.component';
     MatCardModule,
     MatSlideToggleModule,
     MatGridListModule,
+    MatIconModule,
     FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
