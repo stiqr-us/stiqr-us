@@ -13,6 +13,10 @@
       <div style="margin-right:10%;">
         <p style="margin-top:0px;">Hi, you scanned {{userProfile.name}}'s QR code.</p>
         <p>Please help get {{userProfile.name}}'s item back to him.</p>
+        <div *ngIf="!locationShared">
+          <p>Would you like to share your location to help the owner find their item?</p>
+          <button mat-raised-button (click)="shareLocationHandler(sticker)">Share Location</button>
+        </div>
       </div>
       <div style="position:relative; display:inline-block;">
         <img class="contactCardImg" src="../../assets/images/Contact Card.png" alt="Contact Card Img">

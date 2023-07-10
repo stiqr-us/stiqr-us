@@ -25,6 +25,7 @@ import { StiqrComponent } from './components/stiqr/stiqr.component';
 import { CustomerAccountGuard } from './components/customer-account/customer-account.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { MatIconModule } from '@angular/material/icon';
+import { POSITION_OPTIONS } from '@ng-web-apis/geolocation';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,13 @@ import { MatIconModule } from '@angular/material/icon';
     provideAuth(() => getAuth()),
     provideFirestore(() => initializeFirestore(getApp(), {ignoreUndefinedProperties: true}))
   ],
-  providers: [CustomerAccountGuard],
+  providers: [
+    CustomerAccountGuard,
+    {
+      provide: POSITION_OPTIONS,
+      useValue: {enableHighAccuracy: true}
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
