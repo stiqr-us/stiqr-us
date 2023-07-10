@@ -58,7 +58,7 @@ export class DbService {
     updateDoc(doc(this.userProfilesCollection, userId), field, fieldValue);
   }
 
-  addSticker(sticker: Sticker) {
+  addSticker(sticker: Sticker): void {
     addDoc(this.stickersCollection, sticker)
   }
 
