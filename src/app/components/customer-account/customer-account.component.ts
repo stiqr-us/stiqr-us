@@ -7,6 +7,8 @@ import { UserProfile } from '../../types/user-profile';
 import { Sticker } from '../../types/sticker';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { Router } from '@angular/router';
+import { StiqrEditComponent } from '../stiqr-edit/stiqr-edit.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-customer-account',
@@ -30,7 +32,8 @@ export class CustomerAccountComponent implements OnDestroy {
   constructor(
     public auth: AuthService,
     public db: DbService,
-    private router: Router
+    private router: Router,
+    private matDialog: MatDialog
   ) {
     this.userSub = this.auth.user$.subscribe((user: User | null) => {
       if (!!user) {
@@ -113,6 +116,19 @@ export class CustomerAccountComponent implements OnDestroy {
     // this.userProfileSubscription.unsubscribe()
     // this.userStickersSubscription.unsubscribe()
     this.userSub.unsubscribe();
+  }
+
+  stickerChangeHandler(sticker: Sticker) {
+    const dialogRef = this.matDialog.open(StiqrEditComponent, {data: sticker})
+    dialogRef.afterClosed().subscribe((sticker: Sticker | undefined) => {
+      if (!sticker) {
+        return
+      } else if (sticker.name == '') {
+        alert('stiQR name required')
+      } else {
+        this.db.updateSticker(String(sticker.id), 'name', String(sticker.name))
+      }
+    })
   }
 
 }

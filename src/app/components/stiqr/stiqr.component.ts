@@ -7,6 +7,9 @@ import { Sticker } from 'src/app/types/sticker';
 import { UserProfile } from 'src/app/types/user-profile';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { GeoPoint, Timestamp } from "@angular/fire/firestore"
+import { User } from '@angular/fire/auth';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { StiqrEditComponent } from '../stiqr-edit/stiqr-edit.component';
 
 @Component({
   selector: 'app-stiqr',
@@ -32,7 +35,8 @@ export class StiqrComponent{
     private router: Router,
     public db: DbService,
     public auth: AuthService,
-    private readonly geolocation$: GeolocationService
+    private readonly geolocation$: GeolocationService,
+    private matDialog: MatDialog
   ) {
     this.id = this.route.snapshot.params['id'];
     this.sticker$ = this.db.getSticker$(this.id)
@@ -59,6 +63,17 @@ export class StiqrComponent{
         geoPoint: new GeoPoint(position.coords.latitude, position.coords.longitude),
         timestamp: new Timestamp(position.timestamp / 1000, 0)
       })
+    })
+  }
+
+  registerHandler(user: User, sticker: Sticker) {
+    const dialogRef = this.matDialog.open(StiqrEditComponent, {data: sticker})
+    dialogRef.afterClosed().subscribe((sticker: Sticker | undefined) => {
+      if (!sticker) {
+        return
+      } else if (sticker.name) {
+        this.db.connectStickerToUser(String(sticker.id), user.uid, sticker.name)
+      }
     })
   }
 

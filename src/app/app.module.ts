@@ -26,6 +26,10 @@ import { CustomerAccountGuard } from './components/customer-account/customer-acc
 import { AdminComponent } from './components/admin/admin.component';
 import { MatIconModule } from '@angular/material/icon';
 import { POSITION_OPTIONS } from '@ng-web-apis/geolocation';
+import { MatDialogModule } from '@angular/material/dialog';
+import { StiqrEditComponent } from './components/stiqr-edit/stiqr-edit.component'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,8 @@ import { POSITION_OPTIONS } from '@ng-web-apis/geolocation';
     FAQComponent,
     ContactUsComponent,
     StiqrComponent,
-    AdminComponent
+    AdminComponent,
+    StiqrEditComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,9 @@ import { POSITION_OPTIONS } from '@ng-web-apis/geolocation';
     MatGridListModule,
     MatIconModule,
     FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => initializeFirestore(getApp(), {ignoreUndefinedProperties: true}))
