@@ -3,24 +3,31 @@
 </div>
 
 <div *ngIf="sticker$ | async as sticker">
-  <div *ngIf="!sticker.activated" style="width:90%; height:auto; margin:auto; border-radius: 4px; box-shadow: 1px 2px 4px -1px black;">
+  <div *ngIf="!sticker.activated" style="width:90%; max-width:350px; height:auto; margin:auto; border-radius: 4px; box-shadow: 1px 2px 4px -1px black; padding:20px 0px; margin:20px auto;">
     <p style="text-align: center; font-size:1.4rem; font-weight: 500;">Sticker Registration</p>
 
     <div style="width:90%; margin-left:5%; margin-right:5%; min-height:100px; background-color: white;">
 
-      <!-- <p>{{userProfile.name}} is logged in</p> -->
       <div style="text-align: center;">
         <img src="https://loremflickr.com/200/200/mountains" alt="scenery">
       </div>
-      <!-- <p>The sticker </p> -->
 
       <p style="text-align: center;">Ready to register your product?</p>
-      <button mat-button style="background-color: blue; color:white;">Register</button>
+      <div style="text-align: center;">
+        <button mat-button style="background-color: blue; color:white;">Register</button>
+      </div>
+
+      <p style="text-align:center;">OR</p>
+
+      <div style="text-align: center;">
+        <button mat-button class="returnBtn" routerLink="/">Return to STIQR</button>
+      </div>
 
     </div>
 
-    <button mat-button *ngIf="!(auth.user$ | async)"
-    (click)="loginRedirectHandler()">Login</button>
+    <!-- Testing: Delete when ready -->
+    <!-- <button mat-button *ngIf="!(auth.user$ | async)"
+    (click)="loginRedirectHandler()">Login</button> -->
   </div>
   <div *ngIf="sticker.activated" class="fixedFinderBackground">
     <div class="stickerBody" *ngIf="userProfile$ | async as userProfile">

@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'stiqr-us';
 
+  // When the testing environment of dev is deployed, use url below.
+  // https://stiqr-dev.web.app
+
   name:string = '';
 
   logoutModalDisplay:boolean = false;
