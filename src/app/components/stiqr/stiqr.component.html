@@ -87,7 +87,7 @@
             </div>
             <div class="contactItemDiv">
               <p class="contactItem" *ngIf="userProfile.shareLinkAlways || sticker.lost; else anonymous">
-                <a href="{{userProfile.link}}">{{userProfile.link}}</a>
+                <a href="https://{{userProfile.link}}">{{userProfile.link}}</a>
               </p>
             </div>
           </div>
@@ -106,5 +106,5 @@
 </div>
 
 <ng-template #anonymous>
-  <p>Anonymous</p>
+  <p class="contactItem">Hidden</p>
 </ng-template>
