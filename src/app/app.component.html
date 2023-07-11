@@ -30,7 +30,7 @@
       routerLink = "/signup">
         <a style="text-decoration: none; color: white;">Sign Up</a>
     </button>
-    <button mat-button class="LoginBtn"
+    <button mat-button class="accountBtn"
       routerLink="/customer"
       *ngIf="router.url !== '/customer' && (auth.user$ | async)">
         <a style="text-decoration: none; color: white;">My Account</a>
