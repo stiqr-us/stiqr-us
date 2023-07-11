@@ -52,7 +52,7 @@ export class DbService {
       let fieldValue = undefined
     } else if (field == "name" && !fieldValue) {
       // TODO: Tell user they can't have null values
-      alert('Name can\'t be empty')
+      alert('Name required')
       return
     };
     updateDoc(doc(this.userProfilesCollection, userId), field, fieldValue);
@@ -62,7 +62,7 @@ export class DbService {
     addDoc(this.stickersCollection, sticker)
   }
 
-  connectStickerToUser(stickerId: string, userId: string, stickerName: string): void {
+  connectStickerToUser(stickerId: string, userId: string, stickerName: string = 'Name Me'): void {
     updateDoc(doc(this.stickersCollection, stickerId), {
       activated: true,
       userId: userId,

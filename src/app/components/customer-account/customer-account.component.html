@@ -57,7 +57,7 @@
 
   <mat-grid-list cols="3">
     <mat-grid-tile *ngFor="let sticker of stickers$ | async">
-      <mat-card>
+      <mat-card (dblclick)="stickerChangeHandler(sticker)">
         <mat-card-header>
           <mat-card-title>{{sticker.name}}</mat-card-title>
         </mat-card-header>

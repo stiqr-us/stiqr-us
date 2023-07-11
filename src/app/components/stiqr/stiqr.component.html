@@ -14,13 +14,18 @@
       </div>
       <!-- <p>The sticker </p> -->
 
-      <p style="text-align: center;">Ready to register your product?</p>
-      <button mat-button style="background-color: blue; color:white;">Register</button>
+        <p style="text-align: center;">Ready to register your product?</p>
+        <button *ngIf="auth.user$ | async as user"
+        mat-button style="background-color: blue; color:white;"
+        (click)="registerHandler(user, sticker)">Register</button>
+
+        <button *ngIf="!(auth.user$ | async)"
+        mat-button style="background-color: blue; color:white;"
+        (click)="loginRedirectHandler()">Login</button>
+
 
     </div>
 
-    <button mat-button *ngIf="!(auth.user$ | async)"
-    (click)="loginRedirectHandler()">Login</button>
   </div>
   <div *ngIf="sticker.activated" class="fixedFinderBackground">
     <div class="stickerBody" *ngIf="userProfile$ | async as userProfile">
