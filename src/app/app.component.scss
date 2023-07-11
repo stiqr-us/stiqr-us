@@ -4,11 +4,14 @@
   margin:none;
   padding:0px 20px 0px 30px;
   display:grid;
-  grid-template-columns: 1fr 350px;
+  grid-template-columns: 1fr auto;
 }
 .logo {
   width:100px;
   height:auto;
+}
+.logo:hover {
+  cursor:pointer;
 }
 .title-box {
   text-align: center;
@@ -25,7 +28,18 @@
   column-gap:50px;
   direction: rtl;
   margin:auto 0px;
-
+}
+@media only screen and (max-width:800px) {
+  .navButtons {
+    grid-template-columns: 1fr 1fr;
+    row-gap:20px;
+  }
+}
+@media only screen and (max-width:425px) {
+  .navButtons {
+    grid-template-columns: 1fr;
+    row-gap:20px;
+  }
 }
 .nav-bar{
   display:inline-block;
@@ -55,7 +69,8 @@
 }
 .nav-button:hover{
   background-color: #E0DFD5;
-  color: #313638
+  color: #313638;
+  cursor:pointer;
 }
 .nav-button-p{
   margin:0px;
@@ -104,6 +119,7 @@
 .footerBox:hover{
   background-color: #313638;
   color:white;
+  cursor:pointer;
 }
 
 .logoutModalBackgroud{
