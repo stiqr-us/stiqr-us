@@ -36,3 +36,13 @@
   margin-bottom:15px;
   margin-top: 16px;
 }
+@media only screen and (max-width:600px) {
+  .body{
+    padding:0px;
+    background-color:white;
+  }
+  .loginContainer{
+    box-shadow: none;
+    padding:0px;
+  }
+}
