@@ -25,6 +25,11 @@ import { StiqrComponent } from './components/stiqr/stiqr.component';
 import { CustomerAccountGuard } from './components/customer-account/customer-account.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { MatIconModule } from '@angular/material/icon';
+import { POSITION_OPTIONS } from '@ng-web-apis/geolocation';
+import { MatDialogModule } from '@angular/material/dialog';
+import { StiqrEditComponent } from './components/stiqr-edit/stiqr-edit.component'
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -37,7 +42,8 @@ import { MatIconModule } from '@angular/material/icon';
     FAQComponent,
     ContactUsComponent,
     StiqrComponent,
-    AdminComponent
+    AdminComponent,
+    StiqrEditComponent
   ],
   imports: [
     BrowserModule,
@@ -49,11 +55,20 @@ import { MatIconModule } from '@angular/material/icon';
     MatGridListModule,
     MatIconModule,
     FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => initializeFirestore(getApp(), {ignoreUndefinedProperties: true}))
   ],
-  providers: [CustomerAccountGuard],
+  providers: [
+    CustomerAccountGuard,
+    {
+      provide: POSITION_OPTIONS,
+      useValue: {enableHighAccuracy: true}
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

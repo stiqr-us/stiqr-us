@@ -52,14 +52,24 @@ export class DbService {
       let fieldValue = undefined
     } else if (field == "name" && !fieldValue) {
       // TODO: Tell user they can't have null values
-      alert('Name can\'t be empty')
+      alert('Name required')
       return
     };
     updateDoc(doc(this.userProfilesCollection, userId), field, fieldValue);
   }
 
-  addSticker(sticker: Sticker) {
+  addSticker(sticker: Sticker): void {
     addDoc(this.stickersCollection, sticker)
+  }
+
+  connectStickerToUser(stickerId: string, userId: string, stickerName: string = 'Name Me'): void {
+    updateDoc(doc(this.stickersCollection, stickerId), {
+      activated: true,
+      userId: userId,
+      name: stickerName,
+      lost: false,
+      locations: [],
+    })
   }
 
   getSticker$(stickerId: string): Observable<Sticker> {

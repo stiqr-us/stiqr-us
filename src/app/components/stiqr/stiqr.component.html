@@ -14,8 +14,12 @@
 
       <p style="text-align: center;">Ready to register your product?</p>
       <div style="text-align: center;">
-        <button mat-button style="background-color: blue; color:white;">Register</button>
+        <button mat-button *ngIf="auth.user$ | async as user" style="background-color: blue; color:white;" (click)="registerHandler(user, sticker)>Register</button>
       </div>
+                                                                                                                    
+      <button *ngIf="!(auth.user$ | async)"
+        mat-button style="background-color: blue; color:white;"
+        (click)="loginRedirectHandler()">Login</button>                                                                                                              
 
       <p style="text-align:center;">OR</p>
 
@@ -28,12 +32,17 @@
     <!-- Testing: Delete when ready -->
     <!-- <button mat-button *ngIf="!(auth.user$ | async)"
     (click)="loginRedirectHandler()">Login</button> -->
+
   </div>
   <div *ngIf="sticker.activated" class="fixedFinderBackground">
     <div class="stickerBody" *ngIf="userProfile$ | async as userProfile">
       <div style="margin-right:10%;">
         <p style="margin-top:0px;">Hi, you scanned {{userProfile.name}}'s QR code.</p>
         <p>Please help get {{userProfile.name}}'s item back to him.</p>
+        <div *ngIf="!locationShared">
+          <p>Would you like to share your location to help the owner find their item?</p>
+          <button mat-raised-button (click)="shareLocationHandler(sticker)">Share Location</button>
+        </div>
       </div>
       <div style="position:relative; display:inline-block;">
         <img class="contactCardImg" src="../../assets/images/Contact Card.png" alt="Contact Card Img">
