@@ -43,9 +43,16 @@
 
 <div class="logoutModalBackgroud" *ngIf="logoutModalDisplay">
   <div class="logoutWhiteBlock">
-    <p>Confirm Logout</p>
-    <button mat-button class="signUpBtn" (click)="logoutModalDisplay = false">Exit</button>
-    <button mat-button style="background-color: red;" (click)="confirmedLogout()">Confirm Logout</button>
+    <p style="font-size:1.2rem; text-align:center; margin-top:0px;">Confirm</p>
+    <p style="text-align: center;">Are you ready to logout?</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr;">
+      <div>
+        <button mat-raised-button style="background-color: white; color:black;" (click)="logoutModalDisplay = false">Cancel</button>
+      </div>
+      <div style="text-align: right;">
+        <button mat-raised-button style="background-color: white; color:black;" (click)="confirmedLogout()">Yes</button>
+      </div>
+    </div>
   </div>
 </div>
 

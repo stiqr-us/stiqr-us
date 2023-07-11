@@ -88,7 +88,14 @@
   background-color:#F09D51;
   color:white
 }
-
+.accountBtn{
+  background-color: #313638;
+  color:white;
+}
+.accountBtn:hover{
+  background-color: #E0DFD5;
+  color:black;
+}
 .footer-text{
   margin:0px;
   text-align: center;
@@ -123,6 +130,7 @@
 }
 
 .logoutModalBackgroud{
+  backdrop-filter: blur(6px);
   position:fixed;
   height:100%;
   width:100%;
