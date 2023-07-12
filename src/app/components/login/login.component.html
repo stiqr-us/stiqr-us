@@ -3,11 +3,11 @@
         <p class="signInText">Login</p>
 
         <div class="inputsContainer">
-          <p class="inputLabels">Email</p>
+          <!-- <p class="inputLabels">Email</p>
           <input class="inputs" type="text" [(ngModel)]="email" disabled>
 
           <p class="inputLabels">Password</p>
-          <input class="inputs" type="text" [(ngModel)]="password" disabled>
+          <input class="inputs" type="text" [(ngModel)]="password" disabled> -->
 
           <!-- <p>Forgot your password?</p> -->
 
@@ -15,18 +15,18 @@
           mat-raised-button color="primary"
           routerLink="../customer">TESTING Customer Page</button> -->
 
-          <button class="loginBtn"
+          <!-- <button class="loginBtn"
           mat-raised-button color="primary"
           (click)="auth.loginEmailPassword(email, password)" disabled>Login</button>
 
-          <p style="text-align:center">OR</p>
+          <p style="text-align:center">OR</p> -->
 
           <button class="loginBtn" mat-raised-button color="primary"
           *ngFor="let provider of auth.providers"
           (click)="loginHandler(provider)"
           >{{provider.name}}</button>
 
-          <p style="text-align:center">New to STIQR? Sign Up</p>
+          <!-- <p style="text-align:center">New to STIQR? Sign Up</p> -->
         </div>
     </div>
 </div>
