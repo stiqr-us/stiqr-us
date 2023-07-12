@@ -9,8 +9,10 @@
     <div style="width:90%; margin-left:5%; margin-right:5%; min-height:100px; background-color: white;">
 
       <div style="text-align: center;">
-        <img src="https://loremflickr.com/200/200/mountains" alt="scenery">
+        <img src="../../../assets/images/dodo.png" style="width: 200px;" alt="scenery">
       </div>
+
+      <div style="text-align: center;">
 
       <p style="text-align: center;">Ready to register your product?</p>
       <div style="text-align: center;">
@@ -27,7 +29,6 @@
 
       <p style="text-align:center;">OR</p>
 
-      <div style="text-align: center;">
         <button mat-button class="returnBtn" routerLink="/">Return to STIQR</button>
       </div>
 
@@ -43,10 +44,6 @@
       <div style="margin-right:10%;">
         <p style="margin-top:0px;">Hi, you scanned {{userProfile.name}}'s QR code.</p>
         <p>Please help get {{userProfile.name}}'s item back to him.</p>
-        <div *ngIf="!locationShared">
-          <p>Would you like to share your location to help the owner find their item?</p>
-          <button mat-raised-button (click)="shareLocationHandler(sticker)">Share Location</button>
-        </div>
       </div>
       <div style="position:relative; display:inline-block;">
         <img class="contactCardImg" src="../../assets/images/Contact Card.png" alt="Contact Card Img">
@@ -96,6 +93,10 @@
             </div>
           </div>
         </div>
+      </div>
+      <div *ngIf="!locationShared">
+        <p>Would you like to share your location to help the owner find their item?</p>
+        <button mat-raised-button (click)="shareLocationHandler(sticker)">Share Location</button>
       </div>
     </div>
   </div>
